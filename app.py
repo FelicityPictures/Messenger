@@ -1,14 +1,16 @@
-from flask import Flask, render_template, redirect, request, session, url_fo
-import json
+from flask import Flask, render_template
 
-app = flask(_name_)
+app = Flask(__name__)
 
-@app.route('/', methods=["POST"])
-@app.route('/home', methods=["POST"])
+@app.route('/')
+@app.route('/home')
 def home():
-        return render_template('index.html', user=session['username'])
+    return render_template('index.html')
 
-@app.route('/login', methods=["GET","POST"])
-@app.route('/login/<error>', methods=['GET','POST'])
-def login(error=None):
-    return render_template('login.html'), 401
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+if __name__=='__main__':
+    # app.debug=True
+    app.run(host='0.0.0.0', port=8000)
