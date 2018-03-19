@@ -1,10 +1,19 @@
 {% extends "master.html" %}
 
 {% block body %}
+<ul id="messages">
+  <li>Message 1</li>
+  <li>Message 2</li>
+  <li>Message 3</li>
+</ul>
 
-<h2>index.html</h1>
-<form action="">
-  <input placeholder="Send a message" class="inputMessage"/><button>Send</button>
-</form>
+<div id="inputForm" onsubmit="javascript:(e) =>{e.preventDefault();}">
+  <input id="inputText" type="text" placeholder="Send a message"/>
+  <button type="button" id="sendButton">Send</button>
+</div>
+{% endblock %}
 
+{% block footer %}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 {% endblock %}

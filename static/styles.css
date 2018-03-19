@@ -1,3 +1,32 @@
-.inputMessage{
+body {
+  font: 13px Helvetica, Arial;
+}
 
+#red{
+  color: red;
+}
+
+#messages{
+  list-style-type: none;
+  text-align: left;
+}
+
+#inputForm{
+  padding: 3px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+#inputText{
+  border: 0;
+  padding: 10px;
+  width: 90%;
+  margin-right: .5%;
+}
+
+#sendButton{
+  width: 9%;
+  border: none;
+  padding: 10px;
 }
