@@ -1,6 +1,9 @@
 # Felicity's sandbox instructions
 MySQL_Instructions.txt
 
+#database
+*.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

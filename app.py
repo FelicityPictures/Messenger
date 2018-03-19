@@ -1,6 +1,7 @@
 from flask import Flask, render_template
+from sqlalchemy_utils import create_database, database_exists
 from flask_socketio import SocketIO, send, emit
-from database import db
+from database import db, Chats, Persons
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
@@ -8,9 +9,25 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger('app')
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
+
+db_url = 'sqlite:///messenger.db'
+
+app.config.update(
+    SECRET_KEY='secret!',
+    SQLALCHEMY_DATABASE_URI=db_url,
+    SQLALCHEMY_TRACK_MODIFICATIONS=True,
+)
 socketio = SocketIO(app)
 db.init_app(app)
+
+if not database_exists(db_url):
+    create_database(db_url)
+db.create_all(app=app)
+
+with app.app_context():
+    chat = Chats()
+    db.session.add(chat)
+    db.session.commit()
 
 @app.route('/')
 @app.route('/home')
