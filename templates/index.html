@@ -1,6 +1,7 @@
 {% extends "master.html" %}
 
 {% block body %}
+<h1> INDEX PAGE </h1>
 <ul id="messages">
   <li>Message 1</li>
   <li>Message 2</li>
@@ -11,6 +12,12 @@
   <input id="inputText" type="text" placeholder="Send a message"/>
   <button type="button" id="sendButton">Send</button>
 </div>
+
+{% if logged_in %}
+<form action="/logout">
+    <input type="submit" value="Log Out" />
+</form>
+{% endif %}
 {% endblock %}
 
 {% block footer %}

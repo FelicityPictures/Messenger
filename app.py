@@ -1,8 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, redirect, request, session, abort
 from sqlalchemy_utils import create_database, database_exists
 from flask_socketio import SocketIO, send, emit
-from database import db, Chats, Persons, Messages
+from database import db, Chats, Users, Messages
 import logging
+import os
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -15,6 +16,8 @@ db_url = 'sqlite:///messenger.db'
 app.config.update(
     SECRET_KEY='secret!',
     SQLALCHEMY_DATABASE_URI=db_url,
+    # the app istself is a multithreaded, so it keeps a pool of db session.
+    # sqla makes sessions a global context and stored in db
     SQLALCHEMY_TRACK_MODIFICATIONS=True,
 )
 socketio = SocketIO(app)
@@ -27,16 +30,28 @@ db.create_all(app=app)
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('index.html')
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    else:
+        return render_template('index.html', logged_in=True)
 
-# @app.route('/users/<id>')
-# def users(id):
-#     user = Users.query.get(id)
-#     return jsonify(user.)
-
-@app.route('/login')
+@app.route('/login', methods=['POST'])
 def login():
-    return render_template('login.html')
+
+    # POST_USERNAME = str(request.form['username'])
+    # POST_PASSWORD = str(request.form['password'])
+
+    # result = User.query.filter_by(username='peter').first()
+    if result:
+        session['logged_in'] = True
+    else:
+        flash('fuck off')
+    return home()
+
+@app.route("/logout")
+def logout():
+    session['logged_in'] = False
+    return home()
 
 @socketio.on('connected')
 def connected():
