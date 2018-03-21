@@ -62,6 +62,10 @@ def logout():
     session['logged_in'] = False
     return home()
 
+@app.route("/register", method=['POST', 'GET'])
+def register():
+    pass
+
 @socketio.on('connected')
 def connected():
     print('Connected!')

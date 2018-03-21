@@ -8,7 +8,8 @@ socket.on('connect', function() {
 });
 
 // get message
-function sendMessage(){console.log('sending message');
+function sendMessage(){
+  console.log('sending message');
   var messageText = textMessage.value;
   socket.emit('message', messageText);
   document.getElementById("inputText").value = '';
