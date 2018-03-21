@@ -1,0 +1,21 @@
+{% extends "master.html" %}
+
+{% block body %}
+
+<h1>register.html</h1>
+
+<form action="/register" method="POST">
+  <input type="username" name="username" placeholder="Username" required>
+  <input type="password" name="password" id="password" placeholder="Password"
+    required>
+  <input type="password" id="confirmPassword" onChange="checkPasswordMatch();"
+    placeholder="Password" required>
+  <div class="registrationFormAlert" id="divCheckPasswordMatch"></div>
+  <input id="registerInput" type="submit" value="Register">
+</form>
+
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript" src="{{ url_for('static', filename='register.js') }}"></script>
+{% endblock %}

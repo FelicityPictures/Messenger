@@ -29,9 +29,8 @@ db.create_all(app=app)
 
 # One person test case
 with app.app_context():
-    user = Users(username="me")
-    user.set_password("thing")
-    print(user)
+    user = Users("me","thing")
+    print('first guy!')
     db.session.add(user)
     db.session.commit()
 
@@ -41,7 +40,7 @@ def home():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
-        return render_template('index.html', logged_in=True)
+        return render_template('index.html', users=Users.query.all())
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -62,9 +61,16 @@ def logout():
     session['logged_in'] = False
     return home()
 
-@app.route("/register", method=['POST', 'GET'])
+@app.route('/register', methods=['POST', 'GET'])
 def register():
-    pass
+    if request.method == 'POST':
+        with app.app_context():
+            user = Users(request.form['username'], request.form['password'])
+            db.session.add(user)
+            db.session.commit()
+            print('\nRecord was successfully added\n')
+        return home()
+    return render_template('register.html')
 
 @socketio.on('connected')
 def connected():

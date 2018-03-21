@@ -13,11 +13,32 @@
   <button type="button" id="sendButton">Send</button>
 </div>
 
-{% if logged_in %}
+<h1> people </h1>
+<table>
+        <thead>
+           <tr>
+              <th>id</th>
+              <th>Username</th>
+              <th>last_active</th>
+           </tr>
+        </thead>
+
+        <tbody>
+           {% for user in users %}
+              <tr>
+                 <td>{{ user.id }}</td>
+                 <td>{{ user.username }}</td>
+                 <td>{{ user.last_active }}</td>
+              </tr>
+           {% endfor %}
+        </tbody>
+     </table>
+
+
 <form action="/logout">
     <input type="submit" value="Log Out" />
 </form>
-{% endif %}
+
 {% endblock %}
 
 {% block footer %}

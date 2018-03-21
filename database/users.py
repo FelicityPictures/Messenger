@@ -11,6 +11,11 @@ class Users(db.Model):
             default=datetime.utcnow)
     messages = db.relationship('Messages', backref='users', lazy=True)
 
+    def __init__(self, username, password):
+        self.username = username
+        self.password_hash = hashpw(password.encode('utf-8'), gensalt())
+        last_active = datetime.utcnow()
+
     def set_password(self, password):
         self.password_hash = hashpw(password.encode('utf-8'), gensalt())
 
