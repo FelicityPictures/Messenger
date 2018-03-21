@@ -7,3 +7,6 @@ class Persons(db.Model):
     username = db.Column(db.String(250), nullable=False)
     last_active = db.Column(db.DateTime, nullable=False,
             default=datetime.utcnow)
+    messages = db.relationship('Messages', backref='persons', lazy=True)
+
+    # def seralize_all(self):

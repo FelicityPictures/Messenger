@@ -5,3 +5,5 @@ db = SQLAlchemy()
 from .persons import *
 
 from .chats import *
+
+from .messages import *

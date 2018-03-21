@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from sqlalchemy_utils import create_database, database_exists
 from flask_socketio import SocketIO, send, emit
-from database import db, Chats, Persons
+from database import db, Chats, Persons, Messages
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
@@ -24,16 +24,15 @@ if not database_exists(db_url):
     create_database(db_url)
 db.create_all(app=app)
 
-with app.app_context():
-    chat = Chats()
-    db.session.add(chat)
-    db.session.commit()
-
 @app.route('/')
 @app.route('/home')
 def home():
     return render_template('index.html')
 
+# @app.route('/users/<id>')
+# def users(id):
+#     user = Users.query.get(id)
+#     return jsonify(user.)
 
 @app.route('/login')
 def login():
@@ -45,10 +44,11 @@ def connected():
 
 @socketio.on('message')
 def my_event(data):
-    print("Message: " + data)
-    logger.info('Message:' + data)
+    print("\nMessage: " + data)
+    logger.info('Message:' + data + '\n')
+    emit('new_message', data, broadcast=True) #back to client
 
 if __name__=='__main__':
     app.debug=True
     socketio.run(app, port=8000)
-    # app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=8000)

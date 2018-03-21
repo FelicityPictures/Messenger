@@ -11,3 +11,5 @@ class Chats(db.Model):
     # Persons load after the chat, so query the chat with people in it.
     persons = db.relationship('Persons', secondary=persons_to_chat, lazy='subquery',
         backref=db.backref('chats', lazy=True))
+    #one-to-many rel with messages 
+    messages = db.relationship('Messages', backref='chats', lazy=True)
