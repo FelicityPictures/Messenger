@@ -27,6 +27,13 @@ if not database_exists(db_url):
     create_database(db_url)
 db.create_all(app=app)
 
+# One person
+with app.app_context():
+    user = Users(username="me", password="thing")
+    print(user)
+    db.session.add(user)
+    db.session.commit()
+
 @app.route('/')
 @app.route('/home')
 def home():
@@ -38,10 +45,12 @@ def home():
 @app.route('/login', methods=['POST'])
 def login():
 
-    # POST_USERNAME = str(request.form['username'])
-    # POST_PASSWORD = str(request.form['password'])
+    post_username = str(request.form['username'])
+    post_password = str(request.form['password'])
 
-    # result = User.query.filter_by(username='peter').first()
+    result = Users.query.filter(Users.username == post_username
+     and Users.password == post_password).first()
+
     if result:
         session['logged_in'] = True
     else:

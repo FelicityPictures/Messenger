@@ -9,7 +9,7 @@ class Chats(db.Model):
     # Chat Modal
     id = db.Column(db.Integer, primary_key=True)
     # users load after the chat, so query the chat with people in it.
-    users = db.relationship('users', secondary=users_to_chat, lazy='subquery',
+    users = db.relationship('Users', secondary=users_to_chat, lazy='subquery',
         backref=db.backref('chats', lazy=True))
     #one-to-many rel with messages
     messages = db.relationship('Messages', backref='chats', lazy=True)
