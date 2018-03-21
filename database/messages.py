@@ -10,4 +10,4 @@ class Messages(db.Model):
         nullable=False)
     chat_id = db.Column(db.Integer, db.ForeignKey('chats.id'),
         nullable=False)
-    message = db.Column(db.String(250), nullable=False)
+    message = db.Column(db.Text, nullable=False)

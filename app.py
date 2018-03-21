@@ -11,7 +11,7 @@ logger = logging.getLogger('app')
 
 app = Flask(__name__)
 
-db_url = 'sqlite:///messenger.db'
+db_url = 'sqlite:///:memory:'
 
 app.config.update(
     SECRET_KEY='secret!',
@@ -27,9 +27,10 @@ if not database_exists(db_url):
     create_database(db_url)
 db.create_all(app=app)
 
-# One person
+# One person test case
 with app.app_context():
-    user = Users(username="me", password="thing")
+    user = Users(username="me")
+    user.set_password("thing")
     print(user)
     db.session.add(user)
     db.session.commit()
@@ -44,17 +45,16 @@ def home():
 
 @app.route('/login', methods=['POST'])
 def login():
-
     post_username = str(request.form['username'])
     post_password = str(request.form['password'])
 
-    result = Users.query.filter(Users.username == post_username
-     and Users.password == post_password).first()
+    target_user= Users.query.filter(Users.username == post_username).first()
 
-    if result:
+    if target_user.check_password(post_password):
         session['logged_in'] = True
     else:
         flash('fuck off')
+        print('Wrong pass')
     return home()
 
 @app.route("/logout")
