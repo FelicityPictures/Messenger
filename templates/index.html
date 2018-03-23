@@ -41,8 +41,34 @@
     <input id="inputText" type="text" placeholder="Send a message"/>
     <button type="submit" id="sendButton">Send</button>
   </form>
-  
+
 </div>
+
+<h1> people </h1>
+<table>
+        <thead>
+           <tr>
+              <th>id</th>
+              <th>Username</th>
+              <th>last_active</th>
+           </tr>
+        </thead>
+
+        <tbody>
+           {% for user in users %}
+              <tr>
+                 <td>{{ user.id }}</td>
+                 <td>{{ user.username }}</td>
+                 <td>{{ user.last_active }}</td>
+              </tr>
+           {% endfor %}
+        </tbody>
+     </table>
+
+
+<form action="/logout">
+    <input type="submit" value="Log Out" />
+</form>
 
 {% endblock %}
 

@@ -6,8 +6,8 @@ class Messages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sent_time = db.Column(db.DateTime, nullable=False,
         default=datetime.utcnow)
-    sender_id = db.Column(db.Integer, db.ForeignKey('persons.id'),
+    sender_id = db.Column(db.Integer, db.ForeignKey('users.id'),
         nullable=False)
     chat_id = db.Column(db.Integer, db.ForeignKey('chats.id'),
         nullable=False)
-    message = db.Column(db.String(250), nullable=False)
+    message = db.Column(db.Text, nullable=False)
