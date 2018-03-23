@@ -1,9 +1,21 @@
-body {
+body{
   font: 13px Helvetica, Arial;
 }
 
-#red{
-  color: red;
+li{
+  padding: 10px;
+}
+
+#chatBox{
+  height: 80vh;
+}
+
+#messagesContainer{
+  width: 70%;
+  height: 100vh;
+  max-height: 100%;
+  margin: 0;
+  overflow-y: scroll;
 }
 
 #messages{
@@ -18,15 +30,23 @@ body {
   width: 100%;
 }
 
+.inline-flex{
+  display: inline-flex;
+}
+
 #inputText{
-  border: 0;
+  border-width: 1px;
   padding: 10px;
   width: 90%;
+  height: 5vh;
   margin-right: .5%;
+  flex-grow: 2;
 }
 
 #sendButton{
-  width: 9%;
+  width: 8%;
+  height: 5vh;
   border: none;
-  padding: 10px;
+  padding: auto;
+  flex-grow: 1;
 }
