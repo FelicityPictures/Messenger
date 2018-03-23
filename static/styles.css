@@ -9,6 +9,7 @@ li{
 
 #logout{
   float: right;
+  margin-top: -20px;
 }
 
 .container{
@@ -31,8 +32,7 @@ li{
 }
 
 #messagesContainer{
-  height: 100%;
-  max-height: 100%;
+  max-height: 60%;
   margin: 0;
   overflow-y: auto;
 }
