@@ -3,15 +3,19 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Messenger</title>
+    <title>Plugged In</title>
 
       <!-- CSS Stuff -->
       <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-      <!-- Bootstrap -->
-      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <h1>Messenger</h1>
 
+      <!-- Bootstrap -->
+      <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+
+      <!-- JQuery -->
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <h1>Plugged In</h1>
+    {% block head %}
+    {% endblock %}
   </head>
 
   <body>

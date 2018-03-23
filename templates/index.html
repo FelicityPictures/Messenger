@@ -1,75 +1,58 @@
 {% extends "master.html" %}
 
+{% block head%}
+<!-- <form action="/logout" id="logout">
+    <input type="submit" value="Log Out" />
+</form> -->
+{% endblock %}
+
 {% block body %}
-<div id="chatBox">
-  <div id="messagesContainer">
-    <ul id="messages">
-      <li>Message 1</li>
-      <li>Message 2</li>
-      <li>Message 3</li>
-      <li>Message 1</li>
-      <li>Message 2</li>
-      <li>Message 3</li>
-      <li>Message 1</li>
-      <li>Message 2</li>
-      <li>Message 3</li>
-      <li>Message 1</li>
-      <li>Message 2</li>
-      <li>Message 3</li>
-      <li>Message 1</li>
-      <li>Message 2</li>
-      <li>Message 3</li>
-      <li>Message 1</li>
-      <li>Message 2</li>
-      <li>Message 3</li>
-      <li>Message 1</li>
-      <li>Message 2</li>
-      <li>Message 3</li>
-      <li>Message 1</li>
-      <li>Message 2</li>
-      <li>Message 3</li>
-      <li>Message 1</li>
-      <li>Message 2</li>
-      <li>Message 3</li>
-      <li>Message 1</li>
-      <li>Message 2</li>
-      <li>Message 3</li>
-    </ul>
+
+<div class="container">
+  <div id="online">
+  <h2>Online</h2>
+    <table>
+      <thead>
+         <tr>
+            <th>id</th>
+            <th>Username</th>
+            <th>last_active</th>
+         </tr>
+      </thead>
+
+      <tbody>
+         {% for user in users %}
+            <tr>
+               <td>{{ user.id }}</td>
+               <td>{{ user.username }}</td>
+               <td>{{ user.last_active }}</td>
+            </tr>
+         {% endfor %}
+      </tbody>
+    </table>
   </div>
 
-  <form id="inline-flex inputForm">
-    <input id="inputText" type="text" placeholder="Send a message"/>
-    <button type="submit" id="sendButton">Send</button>
-  </form>
+  <div id="chatBox">
+    <h2>Name of person you're chatting to</h2>
+    <div id="messagesContainer">
+      <ul id="messages">
+        <li>Message 1</li>
+        <li>Message 2</li>
+        <li>Message 3</li>
+        <li>Message 1</li>
+        <li>Message 2</li>
+        <li>Message 3</li>
+      </ul>
+    </div>
+
+    <form id="inputForm">
+      <input id="inputText" type="text" placeholder="Send a message"/>
+      <button type="submit" id="sendButton">Send</button>
+    </form>
+
+  </div>
 
 </div>
-
-<h1> people </h1>
-<table>
-        <thead>
-           <tr>
-              <th>id</th>
-              <th>Username</th>
-              <th>last_active</th>
-           </tr>
-        </thead>
-
-        <tbody>
-           {% for user in users %}
-              <tr>
-                 <td>{{ user.id }}</td>
-                 <td>{{ user.username }}</td>
-                 <td>{{ user.last_active }}</td>
-              </tr>
-           {% endfor %}
-        </tbody>
-     </table>
-
-
-<form action="/logout">
-    <input type="submit" value="Log Out" />
-</form>
-
 {% endblock %}
 
 {% block footer %}

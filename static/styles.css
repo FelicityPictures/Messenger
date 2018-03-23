@@ -1,21 +1,40 @@
 body{
   font: 13px Helvetica, Arial;
+  overflow: hidden;
 }
 
 li{
   padding: 10px;
 }
 
+#logout{
+  float: right;
+}
+
+.container{
+  display: flex;
+  flex-wrap: nowrap;
+  /* height: 100vh;
+  width: 100vh; */
+}
+
+#online{
+  width: 30%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  overflow-y: auto;
+}
+
 #chatBox{
-  height: 80vh;
+  width: 70%;
 }
 
 #messagesContainer{
-  width: 70%;
-  height: 100vh;
+  height: 100%;
   max-height: 100%;
   margin: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 #messages{
@@ -24,29 +43,22 @@ li{
 }
 
 #inputForm{
+  display: flex;
+  flex-wrap: nowrap;
   padding: 3px;
   position: absolute;
   bottom: 0;
-  width: 100%;
-}
-
-.inline-flex{
-  display: inline-flex;
+  width: 70%;
 }
 
 #inputText{
   border-width: 1px;
   padding: 10px;
   width: 90%;
-  height: 5vh;
-  margin-right: .5%;
-  flex-grow: 2;
 }
 
 #sendButton{
-  width: 8%;
-  height: 5vh;
+  width: 6%;
   border: none;
   padding: auto;
-  flex-grow: 1;
 }
