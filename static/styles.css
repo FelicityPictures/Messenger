@@ -1,9 +1,40 @@
-body {
+body{
   font: 13px Helvetica, Arial;
+  overflow: hidden;
 }
 
-#red{
-  color: red;
+li{
+  padding: 10px;
+}
+
+#logout{
+  float: right;
+  margin-top: -20px;
+}
+
+.container{
+  display: flex;
+  flex-wrap: nowrap;
+  /* height: 100vh;
+  width: 100vh; */
+}
+
+#online{
+  width: 30%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  overflow-y: auto;
+}
+
+#chatBox{
+  width: 70%;
+}
+
+#messagesContainer{
+  max-height: 60%;
+  margin: 0;
+  overflow-y: auto;
 }
 
 #messages{
@@ -12,21 +43,22 @@ body {
 }
 
 #inputForm{
+  display: flex;
+  flex-wrap: nowrap;
   padding: 3px;
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 70%;
 }
 
 #inputText{
-  border: 0;
+  border-width: 1px;
   padding: 10px;
   width: 90%;
-  margin-right: .5%;
 }
 
 #sendButton{
-  width: 9%;
+  width: 6%;
   border: none;
-  padding: 10px;
+  padding: auto;
 }

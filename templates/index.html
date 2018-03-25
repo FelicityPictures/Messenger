@@ -1,51 +1,73 @@
 {% extends "master.html" %}
 
-{% block body %}
-<h1> INDEX PAGE </h1>
-
-<h2> current user is: {{ user.username }} </h2>
-<!-- SARA DOESNT KNOW HOW TO CHECK TABLES FROM MEMORY, SO JUST PRINT EVERYTHING! -->
-<h1> people </h1>
-<table>
-    <thead>
-       <tr>
-          <th>id</th>
-          <th>Username</th>
-          <th>last_active</th>
-       </tr>
-    </thead>
-
-    <tbody>
-       {% for user in users %}
-          <tr>
-             <td>{{ user.id }}</td>
-             <td>{{ user.username }}</td>
-             <td>{{ user.last_active }}</td>
-          </tr>
-       {% endfor %}
-    </tbody>
- </table>
-
-<!-- real shits -->
-
-<ul id="messages">
-  <li>Message 1</li>
-  <li>Message 2</li>
-  <li>Message 3</li>
-</ul>
-
-<div id="inputForm" onsubmit="javascript:(e) =>{e.preventDefault();}">
-  <input id="inputText" type="text" placeholder="Send a message"/>
-  <button type="button" id="sendButton">Send</button>
-</div>
-
-<form action="/logout">
+{% block head%}
+<form action="/logout" id="logout">
     <input type="submit" value="Log Out" />
 </form>
+{% endblock %}
 
+{% block body %}
+
+<div class="container">
+  <div id="online">
+  <h2>Online</h2>
+    <table>
+      <thead>
+         <tr>
+            <th>id</th>
+            <th>Username</th>
+            <th>last_active</th>
+         </tr>
+      </thead>
+
+      <tbody>
+         {% for user in users %}
+            <tr>
+               <td>{{ user.id }}</td>
+               <td>{{ user.username }}</td>
+               <td>{{ user.last_active }}</td>
+            </tr>
+         {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div id="chatBox">
+    <h2>Name of person you're chatting to</h2>
+    <div id="messagesContainer">
+      <ul id="messages">
+        <li>Message 1</li>
+        <li>Message 2</li>
+        <li>Message 3</li>
+        <li>Message 1</li>
+        <li>Message 2</li>
+        <li>Message 3</li>
+        <li>Message 1</li>
+        <li>Message 2</li>
+        <li>Message 3</li>
+        <li>Message 1</li>
+        <li>Message 2</li>
+        <li>Message 3</li>
+        <li>Message 1</li>
+        <li>Message 2</li>
+        <li>Message 3</li>
+        <li>Message 1</li>
+        <li>Message 2</li>
+        <li>Message 3</li>
+      </ul>
+    </div>
+
+    <form id="inputForm">
+      <input id="inputText" type="text" placeholder="Send a message"/>
+      <button type="submit" id="sendButton">Send</button>
+    </form>
+
+  </div>
+
+</div>
 {% endblock %}
 
 {% block footer %}
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script type="text/javascript"  src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 {% endblock %}

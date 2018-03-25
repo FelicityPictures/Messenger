@@ -1,11 +1,17 @@
 var sendButton = document.getElementById('sendButton');
 var textMessage = document.getElementById('inputText');
-sendButton.addEventListener("click", sendMessage);
+var messages = document.getElementById('messages');
+// sendButton.addEventListener("click", sendMessage);
 
 var socket = io();
 socket.on('connect', function() {
   console.log('connected');
 });
+
+$("#inputForm").submit((e) => {
+  e.preventDefault();
+  sendMessage();
+})
 
 // get message
 function sendMessage(){
