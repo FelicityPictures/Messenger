@@ -42,14 +42,17 @@ def home():
     else:
         return render_template('index.html', users=Users.query.all())
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET','POST'])
 def login():
+    if session.get('logged_in'):
+        flash("Already logged in!")
+        return home()
     post_username = str(request.form['username'])
     post_password = str(request.form['password'])
 
     target_user= Users.query.filter(Users.username == post_username).first()
 
-    if target_user.check_password(post_password):
+    if target_user and target_user.check_password(post_password):
         session['logged_in'] = True
     else:
         flash('fuck off')
@@ -57,12 +60,16 @@ def login():
     return home()
 
 @app.route("/logout")
+@login_required
 def logout():
     session['logged_in'] = False
     return home()
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
+    if session.get('logged_in'):
+        flash("Already logged in!")
+        return home()
     if request.method == 'POST':
         with app.app_context():
             user = Users(request.form['username'], request.form['password'])
