@@ -1,7 +1,12 @@
 var sendButton = document.getElementById('sendButton');
 var textMessage = document.getElementById('inputText');
+var messageScroll = document.getElementById("messagesContainer");
 var messages = document.getElementById('messages');
-// sendButton.addEventListener("click", sendMessage);
+
+//on load, scroll is at the bottom
+window.onload = function () {
+  messageScroll.scrollTop = messageScroll.scrollHeight;
+}
 
 var socket = io();
 socket.on('connect', function() {

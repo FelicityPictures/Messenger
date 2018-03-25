@@ -1,20 +1,35 @@
-{% extends "master.html" %}
+<!DOCTYPE html>
+<html>
 
-{% block head %}
-<!-- CSS Stuff -->
-<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" />
-{% endblock %}
+  <head>
+    <meta charset="utf-8">
+    <title>Plugged In</title>
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <h1>Plugged In</h1>
 
+    <!-- CSS Stuff -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" />
 
-{% block body %}
-<!-- <h1>login.html</h1> -->
+  </head>
 
-<form action="/login" method="POST">
-  <input type="username" name="username" placeholder="Username">
-  <input type="password" name="password" placeholder="Password" required>
-  <input type="submit" value="Log in">
-</form>
+  <body>
 
-<a href="/register">register now!</a>
+  <div class="centerOnPage centerContainer">
+    <p>login.html</p>
+    <form class="centerContainer" action="/login" method="POST">
+      <input class="inputText" type="username" name="username" placeholder="Username">
+      <input class="inputText" type="password" name="password" placeholder="Password" required>
+      <input class="button" type="submit" value="Log in">
+    </form>
 
-{% endblock %}
+    <a href="/register">register now!</a>
+  </div>
+
+</body>
+
+<footer>
+  <!-- jquery -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</footer>
+
+</html>
