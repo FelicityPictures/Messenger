@@ -16,8 +16,6 @@ db_url = 'sqlite:///:memory:'
 app.config.update(
     SECRET_KEY='secret!',
     SQLALCHEMY_DATABASE_URI=db_url,
-    # the app istself is a multithreaded, so it keeps a pool of db session.
-    # sqla makes sessions a global context and stored in db
     SQLALCHEMY_TRACK_MODIFICATIONS=True,
 )
 socketio = SocketIO(app)
@@ -41,7 +39,7 @@ def home():
         return render_template('login.html')
     else:
         return render_template('index.html', users=Users.query.all(),
-        user=session['username'])
+        current_user=session.get('current_user'))
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -55,7 +53,7 @@ def login():
 
     if target_user and target_user.check_password(post_password):
         session['logged_in'] = True
-        session['username'] = post_username
+        session['current_user'] = target_user.jasonify()
     else:
         flash('fuck off')
         print('Wrong pass')
