@@ -1,6 +1,9 @@
 {% extends "master.html" %}
 
 {% block head%}
+<!-- CSS Stuff -->
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" />
+
 <form action="/logout" id="logout">
     <input type="submit" value="Log Out" />
 </form>
