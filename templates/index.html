@@ -1,8 +1,10 @@
 {% extends "master.html" %}
 
-{% block head%}
+{% block head %}
 <!-- CSS Stuff -->
 <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+
+<!-- <h3>Hello, {{ current_user.username }}.</h3> -->
 
 <form action="/logout" id="logout">
     <input type="submit" value="Log Out" />
@@ -12,7 +14,6 @@
 {% block body %}
 
 <div class="container">
-  <h3>Hello, {{ current_user.username }} </h3>
   <div id="online">
   <h2>Online</h2>
     <table>
