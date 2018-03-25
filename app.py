@@ -41,7 +41,7 @@ def home():
         return render_template('login.html')
     else:
         return render_template('index.html', users=Users.query.all(),
-        user=sessions['username'])
+        user=session['username'])
 
 @app.route('/login', methods=['GET','POST'])
 def login():
