@@ -38,10 +38,11 @@ with app.app_context():
 @app.route('/home')
 def home():
     if not session.get('logged_in'):
+        print ('\nlogin\n')
         return render_template('login.html')
     else:
-        return render_template('index.html', users=Users.query.all(),
-        user=session['username'])
+        print ('\nalready logged\n')
+        return render_template('index.html', users=Users.query.all())
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -55,7 +56,6 @@ def login():
 
     if target_user and target_user.check_password(post_password):
         session['logged_in'] = True
-        session['username'] = post_username
     else:
         flash('fuck off')
         print('Wrong pass')
