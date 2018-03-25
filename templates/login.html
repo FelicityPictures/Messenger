@@ -1,8 +1,13 @@
 {% extends "master.html" %}
 
-{% block body %}
+{% block head %}
+<!-- CSS Stuff -->
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" />
+{% endblock %}
 
-<h1>login.html</h1>
+
+{% block body %}
+<!-- <h1>login.html</h1> -->
 
 <form action="/login" method="POST">
   <input type="username" name="username" placeholder="Username">
