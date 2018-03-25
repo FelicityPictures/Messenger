@@ -40,13 +40,14 @@ def home():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
-        return render_template('index.html', users=Users.query.all())
+        return render_template('index.html', users=Users.query.all(),
+        user=sessions['username'])
 
 @app.route('/login', methods=['GET','POST'])
 def login():
     if session.get('logged_in'):
         flash("Already logged in!")
-        return home()
+
     post_username = str(request.form['username'])
     post_password = str(request.form['password'])
 
@@ -54,13 +55,13 @@ def login():
 
     if target_user and target_user.check_password(post_password):
         session['logged_in'] = True
+        session['username'] = post_username
     else:
         flash('fuck off')
         print('Wrong pass')
     return home()
 
 @app.route("/logout")
-@login_required
 def logout():
     session['logged_in'] = False
     return home()
