@@ -1,5 +1,35 @@
-form{
+.centerOnPage{
   height: 50vh;
-  width: 50vh;
-  vertical-align: middle;
+  width: 50vw;
+  border: 1px solid black;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centerContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputText{
+  -webkit-appearance: none;
+  height: 5vh;
+  width: 40vw;
+  border: 1px solid black;
+  padding: 5px;
+  margin: 3px;
+}
+
+.button{
+  border: 2px solid blue;
+  background-color: white;
+  padding: 3px;
+  height: 6vh;
+  width: 30vw;
+  margin: 10px;
 }
