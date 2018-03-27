@@ -27,12 +27,6 @@ class Users(db.Model):
         return {
            'id'         : self.id,
            'last_active': dump_datetime(self.last_active),
-           'username'   : self.username,
-           'messages'   : [m.lean() for m in self.messages]
-        }
-
-    def jasonify_lean(self):
-        return{
-            'id'        : self.id,
-            'username'  : self.username
-        }
+           'username'   : self.Username
+           # 'chats'      : 
+      }

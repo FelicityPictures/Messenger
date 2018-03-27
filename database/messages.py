@@ -26,9 +26,3 @@ class Messages(db.Model):
             'sender_id' : self.sender_id,
             'chat_id'   : self.chat_id
         }
-
-    def jasonify_lean():
-        return{
-            'id'        : self.id,
-            'message'   : self.message
-        }
