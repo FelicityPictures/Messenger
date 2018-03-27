@@ -13,31 +13,50 @@
 
 {% block body %}
 
-<div class="container">
-  <div id="online">
-  <h2>Online</h2>
-    <table>
-      <thead>
-         <tr>
-            <th>id</th>
-            <th>Username</th>
-            <th>last_active</th>
-         </tr>
-      </thead>
+<!--
+Add sliding side bar for side menu to select online users.
+<table>
+  <thead>
+     <tr>
+        <th>id</th>
+        <th>Username</th>
+        <th>last_active</th>
+     </tr>
+  </thead>
 
-      <tbody>
-         {% for user in users %}
-            <tr>
-               <td>{{ user.id }}</td>
-               <td>{{ user.username }}</td>
-               <td>{{ user.last_active }}</td>
-            </tr>
-         {% endfor %}
-      </tbody>
-    </table>
+  <tbody>
+     {% for user in users %}
+        <tr>
+           <td>{{ user.id }}</td>
+           <td>{{ user.username }}</td>
+           <td>{{ user.last_active }}</td>
+        </tr>
+     {% endfor %}
+  </tbody>
+</table> -->
+
+<div class="container">
+  <div id="existingChats">
+  <h2>Existing, recent chats</h2>
+    <div id="chatsContainer">
+      <ul id="chats">
+        <li>First, least recent chat</li>
+        <li>Chat 2</li>
+        <li>Chat 3</li>
+        <li>Chat 1</li>
+        <li>Chat 2</li>
+        <li>Chat 3</li>
+        <li>Chat 1</li>
+        <li>Chat 2</li>
+        <li>Chat 3</li>
+        <li>Chat 1</li>
+        <li>Chat 2</li>
+        <li>Last, most recent chat</li>
+      </ul>
+    </div>
+
   </div>
-  <h2>Chats</h2>
-  </div>
+  <!-- <h2>Chats</h2> -->
 
   <div id="chatBox">
     <h2>Name of person you're chatting to</h2>
