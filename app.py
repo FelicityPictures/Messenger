@@ -44,7 +44,7 @@ with app.app_context():
 def home():
     if session.get('logged_in'):
         return render_template('index.html', users=Users.query.all(),
-        current_user=current_user.id)
+        current_user=session['current_user'])
     else:
         return render_template('login.html')
 
