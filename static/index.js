@@ -7,19 +7,32 @@ var active_ids = []
 window.onload = function () {
   messageScroll.scrollTop = messageScroll.scrollHeight;
 }
+console.log("hello");
 
 var socket = io();
 socket.on('connect', function() {
     console.log('connected');
 });
 
-socket.on('active_user_id', (id)=>{
-  active_ids.push(id)
+socket.on('active_user', (username)=>{
+  active_ids.push(username)
   var node = document.createElement("LI");
-  var textnode = document.createTextNode(id);
+  var textnode = document.createTextNode(username + "has joined the room");
   node.appendChild(textnode);
   document.getElementById("messages").appendChild(node);
-  console.log('active_id: '+id);
+  console.log('active_id: '+ username);
+});
+
+socket.on('disconnect', function(){
+  console.log('disconnected!');
+});
+
+socket.on('deactive_user', (username)=>{
+  var node = document.createElement("LI");
+  var textnode = document.createTextNode(username + "has left the room");
+  node.appendChild(textnode);
+  document.getElementById("messages").appendChild(node);
+  console.log('deactive_user: '+ username);
 });
 
 $("#inputForm").submit((e) => {

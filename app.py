@@ -1,11 +1,11 @@
-from flask import Flask, render_template, flash, redirect, request, session, abort
+from flask import Flask, render_template, flash, redirect, request, session, url_for
 from sqlalchemy_utils import create_database, database_exists
 from flask_socketio import SocketIO, send, emit
 from database import db, Chats, Users, Messages
 import logging
 import os
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.WARN)
 
 logger = logging.getLogger('app')
 
@@ -75,7 +75,7 @@ def login():
 
     if session.get('logged_in'):
         flash("Already logged in!")
-        return home()
+
 
     post_username = str(request.form['username'])
     post_password = str(request.form['password'])
@@ -95,20 +95,20 @@ def login():
 @app.route("/logout")
 def logout():
     session['logged_in'] = False
-    return home()
+    return redirect(url_for('login'))
 
 @app.route("/chats/<chat_id>")
 def chats(chat_id):
     if not session.get('logged_in'):
         flash("Must login")
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
     return 'Chat %s' % chat_id
 
 @socketio.on('connect')
 def connected():
-    id = session['current_user']['id']
-    print("\nActive User Id: " + str(id))
-    emit('active_user_id', id, broadcast=True) #back to client
+    username = session['current_user']['username']
+    print("\n Activate User: " + username)
+    emit('active_user', username, broadcast=True) #back to client
     print('\nConnected!\n')
 
 
@@ -116,6 +116,10 @@ def connected():
 def disconnected():
     # broadcast to all users that a person is active at this time
     print('\nDisconnected!\n')
+    username = session['current_user']['username']
+    print("\n Deactivate User: " + username)
+    emit('deactive_user', username, broadcast=True) #back to client
+    print('\nDisconnected!1\n')
 
 @socketio.on('message')
 def my_event(data):
@@ -127,4 +131,3 @@ def my_event(data):
 if __name__=='__main__':
     app.debug=True
     socketio.run(app, port=8000)
-    app.run(host='0.0.0.0', port=8000)
