@@ -39,11 +39,6 @@ with app.app_context():
     db.session.commit()
     # print ("\n" + str(user.id) + "    " + str(chat.id) +"\n")
 
-active_ids = []
-def add_to_active(id):
-    if id not in active_ids:
-        active_ids.append(id)
-
 @app.route('/')
 @app.route('/home')
 def home():

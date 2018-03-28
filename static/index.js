@@ -2,7 +2,7 @@ var sendButton = document.getElementById('sendButton');
 var textMessage = document.getElementById('inputText');
 var messageScroll = document.getElementById("messagesContainer");
 var messages = document.getElementById('messages');
-var active_ids = []
+
 //on load, scroll is at the bottom
 window.onload = function () {
   messageScroll.scrollTop = messageScroll.scrollHeight;
@@ -15,7 +15,6 @@ socket.on('connect', function() {
 });
 
 socket.on('active_user', (username)=>{
-  active_ids.push(username)
   var node = document.createElement("LI");
   var textnode = document.createTextNode(username + "has joined the room");
   node.appendChild(textnode);
