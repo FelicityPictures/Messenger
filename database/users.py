@@ -27,6 +27,6 @@ class Users(db.Model):
         return {
            'id'         : self.id,
            'last_active': dump_datetime(self.last_active),
-           'username'   : self.Username
-           # 'chats'      : 
+           'username'   : self.username
+           # 'chats'      :
       }

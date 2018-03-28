@@ -39,10 +39,16 @@ with app.app_context():
     db.session.commit()
     # print ("\n" + str(user.id) + "    " + str(chat.id) +"\n")
 
+active_ids = []
+def add_to_active(id):
+    if id not in active_ids:
+        active_ids.append(id)
+
 @app.route('/')
 @app.route('/home')
 def home():
     if session.get('logged_in'):
+        print('\n activepeople' + str(active_ids)+ '\n')
         return render_template('index.html', users=Users.query.all(),
         current_user=session['current_user'])
     else:
@@ -78,8 +84,8 @@ def login():
 
     if target_user and target_user.check_password(post_password):
         session['logged_in'] = True
-        session['current_user'] = target_user.id
-        print ("\n" + str(target_user.chats) + "\n")
+        session['current_user'] = target_user.jasonify()
+        print ("\n" + str(session['current_user']) + "\n")
 
     else:
         flash('fuck off')
@@ -95,23 +101,25 @@ def logout():
 def chats(chat_id):
     if not session.get('logged_in'):
         flash("Must login")
-        return home()
+        return redirect(url_for('index'))
     return 'Chat %s' % chat_id
 
-@socketio.on('connected')
+@socketio.on('connect')
 def connected():
-    # broadcast to all users that a person is active at this time, keep a
-    # global
+    id = session['current_user']['id']
+    print("\nActive User Id: " + str(id))
+    emit('active_user_id', id, broadcast=True) #back to client
     print('\nConnected!\n')
 
-@socketio.on('disconnected')
+
+@socketio.on('disconnect')
 def disconnected():
     # broadcast to all users that a person is active at this time
     print('\nDisconnected!\n')
 
 @socketio.on('message')
 def my_event(data):
-    message = Messages(data, target_user.id, )
+    # message = Messages(data, target_user.id, )
     print("\nMessage: " + data)
     logger.info('Message:' + data + '\n')
     emit('new_message', data, broadcast=True) #back to client
