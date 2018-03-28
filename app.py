@@ -43,7 +43,7 @@ with app.app_context():
 @app.route('/home')
 def home():
     if session.get('logged_in'):
-        print('\n activepeople' + str(active_ids)+ '\n')
+        # print('\n activepeople' + str(active_ids)+ '\n')
         return render_template('index.html', users=Users.query.all(),
         current_user=session['current_user'])
     else:
@@ -76,6 +76,8 @@ def login():
     post_password = str(request.form['password'])
 
     target_user= Users.query.filter(Users.username == post_username).first()
+    if target_user.chats[0].id:
+        print ("I HAVE ONE HELLO" + str(target_user.chats[0].id))
 
     if target_user and target_user.check_password(post_password):
         session['logged_in'] = True
@@ -105,7 +107,6 @@ def connected():
     print("\n Activate User: " + username)
     emit('active_user', username, broadcast=True) #back to client
     print('\nConnected!\n')
-
 
 @socketio.on('disconnect')
 def disconnected():
