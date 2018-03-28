@@ -46,13 +46,18 @@ Add sliding side bar for side menu to select online users.
   <!-- <h2>Chats</h2> -->
 
   <div id="chatBox">
-    {% if chat_id %}
-    <h1> Chat #{{chat_id}} </h1>
+    {% if users_in_chat %}
+    <h1>
+      {% for u in users_in_chat %}
+        {{ u }}
+        <!-- MAYBE TTHE NAME COULD BE A LINK TO SOMETING -->
+      {% endfor %}
+    </h1>
     {% endif %}
     <div id="messagesContainer">
       {% if messages %}
         <ul id="messages">
-          {% for m in messages%}
+          {% for m in messages %}
             <li> {{ m['message'] }} </li>
           {% endfor %}
         </ul>

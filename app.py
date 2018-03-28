@@ -45,6 +45,10 @@ with app.app_context():
 def page_not_found(e):
     return render_template('404.html'), 404
 
+@app.errorhandler(403)
+def cant_access_page(e):
+    return render_template('403.html'), 403
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -104,10 +108,15 @@ def chats(chat_id):
     target_chat = Chats.query.get(chat_id)
     if not target_chat:
         abort(404)
+    users_in_chat = target_chat.users_in_chat()
+    if session['current_user']['username'] not in users_in_chat:
+        abort(403)
     messages = target_chat.messages_in_chat()
+    users_in_chat.remove(session['current_user']['username'])
     session['current_chat'] = target_chat.id
     return render_template('index.html', users=Users.query.all(),
-    current_user=session['current_user'], chat_id=chat_id, messages=messages)
+    current_user=session['current_user'], chat_id=chat_id, messages=messages,
+    users_in_chat=users_in_chat)
 
 @socketio.on('connect')
 def connected():
