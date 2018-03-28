@@ -7,8 +7,10 @@ var messages = document.getElementById('messages');
 window.onload = function () {
   messageScroll.scrollTop = messageScroll.scrollHeight;
 }
-console.log("hello");
 
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// YAS OKAY THIS IS THE SOCKET SHITS, GO BELOW TO SEE THE LOADING THE PAGE SHITS
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 var socket = io();
 socket.on('connect', function() {
     console.log('connected');

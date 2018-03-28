@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, request, session, url_for
+from flask import Flask, render_template, flash, redirect, request, session, url_for, abort
 from sqlalchemy_utils import create_database, database_exists
 from flask_socketio import SocketIO, send, emit
 from database import db, Chats, Users, Messages
@@ -29,8 +29,10 @@ db.create_all(app=app)
 # One person test case
 with app.app_context():
     chat = Chats()
-    user = Users("me","thing")
+    user = Users("ng","thing")
+    user2 = Users("wu","thing")
     chat.users.append(user)
+    chat.users.append(user2)
     db.session.add(chat)
     db.session.add(user)
     db.session.commit()
@@ -39,9 +41,13 @@ with app.app_context():
     db.session.commit()
     # print ("\n" + str(user.id) + "    " + str(chat.id) +"\n")
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 @app.route('/')
-@app.route('/home')
-def home():
+@app.route('/index')
+def index():
     if session.get('logged_in'):
         # print('\n activepeople' + str(active_ids)+ '\n')
         return render_template('index.html', users=Users.query.all(),
@@ -60,7 +66,7 @@ def register():
             db.session.add(user)
             db.session.commit()
             print('\nRecord was successfully added\n')
-        return home()
+        return redirect(url_for('index'))
     return render_template('register.html')
 
 @app.route('/login', methods=['GET','POST'])
@@ -71,23 +77,19 @@ def login():
     if session.get('logged_in'):
         flash("Already logged in!")
 
-
     post_username = str(request.form['username'])
     post_password = str(request.form['password'])
 
     target_user= Users.query.filter(Users.username == post_username).first()
-    if target_user.chats[0].id:
-        print ("I HAVE ONE HELLO" + str(target_user.chats[0].id))
 
-    if target_user and target_user.check_password(post_password):
+    if not (target_user and target_user.check_password(post_password)):
+        flash('fuck off')
+        print('Wrong pass')
+    else:
         session['logged_in'] = True
         session['current_user'] = target_user.jasonify()
         print ("\n" + str(session['current_user']) + "\n")
-
-    else:
-        flash('fuck off')
-        print('Wrong pass')
-    return home()
+    return redirect(url_for('index'))
 
 @app.route("/logout")
 def logout():
@@ -99,7 +101,13 @@ def chats(chat_id):
     if not session.get('logged_in'):
         flash("Must login")
         return redirect(url_for('login'))
-    return 'Chat %s' % chat_id
+    target_chat = Chats.query.get(chat_id)
+    if not target_chat:
+        abort(404)
+    messages = target_chat.messages_in_chat()
+    session['current_chat'] = target_chat.id
+    return render_template('index.html', users=Users.query.all(),
+    current_user=session['current_user'], chat_id=chat_id, messages=messages)
 
 @socketio.on('connect')
 def connected():
@@ -122,7 +130,11 @@ def my_event(data):
     # message = Messages(data, target_user.id, )
     print("\nMessage: " + data)
     logger.info('Message:' + data + '\n')
+    message = Messages(data,session['current_user']['id'],session['current_chat'])
+    db.session.add(message)
+    db.session.commit()
     emit('new_message', data, broadcast=True) #back to client
+
 
 if __name__=='__main__':
     app.debug=True

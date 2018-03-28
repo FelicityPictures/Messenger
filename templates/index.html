@@ -10,7 +10,6 @@
 {% endblock %}
 
 {% block body %}
-
 <!--
 Add sliding side bar for side menu to select online users.
 <table>
@@ -38,21 +37,28 @@ Add sliding side bar for side menu to select online users.
   <h2>Existing, recent chats</h2>
     <div id="chatsContainer">
       <ul id="chats">
-        <li>First, least recent chat</li>
-        <li>Chat 2</li>
-        <li>Last, most recent chat</li>
+        {% for chat_id in current_user['chats'] %}
+          <a href="{{ url_for('chats', chat_id=chat_id) }}"> <li> {{ chat_id }} </li> </a>
+        {% endfor %}
       </ul>
     </div>
-
   </div>
   <!-- <h2>Chats</h2> -->
 
   <div id="chatBox">
-    <h2>Name of person you're chatting to</h2>
+    {% if chat_id %}
+    <h1> Chat #{{chat_id}} </h1>
+    {% endif %}
     <div id="messagesContainer">
-      <ul id="messages">
-        <li>Message 1</li>
-      </ul>
+      {% if messages %}
+        <ul id="messages">
+          {% for m in messages%}
+            <li> {{ m['message'] }} </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <h1> Click on some shit to start, {{ current_user['username'] }}. </h1>
+      {% endif %}
     </div>
 
     <form id="inputForm">

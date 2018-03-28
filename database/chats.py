@@ -13,3 +13,9 @@ class Chats(db.Model):
         backref=db.backref('chats', lazy=True))
     #one-to-many rel with messages
     messages = db.relationship('Messages', backref='chats', lazy=True)
+
+    def users_in_chat(self):
+        return [user.username for user in self.users]
+
+    def messages_in_chat(self):
+        return [m.jasonify() for m in self.messages]
