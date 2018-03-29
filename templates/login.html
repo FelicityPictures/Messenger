@@ -3,19 +3,21 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Plugged In</title>
+    <title>Notis</title>
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <h1>Plugged In</h1>
 
     <!-- CSS Stuff -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+
+    <!-- Bootstrap -->
+    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
 
   </head>
 
   <body>
 
-  <div class="centerOnPage centerContainer">
-    <p>login.html</p>
+  <div id="login" class="centerOnPage centerContainer">
+    <p>Notis</p>
     <form class="centerContainer" action="/login" method="POST">
       <input class="inputText" type="username" name="username" placeholder="Username">
       <input class="inputText" type="password" name="password" placeholder="Password" required>
@@ -30,6 +32,8 @@
 <footer>
   <!-- jquery -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <!-- Javascript -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
 </footer>
 
 </html>

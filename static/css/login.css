@@ -1,12 +1,19 @@
+body{
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+  /* font: Helvetica, sans-serif; */
+  background-color: #ffe0b2;
+}
+
 .centerOnPage{
   height: 50vh;
   width: 50vw;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: #ffffff;
 }
 
 .centerContainer{
@@ -22,7 +29,7 @@
   width: 40vw;
   border: 1px solid black;
   padding: 5px;
-  margin: 3px;
+  margin: 5px;
 }
 
 .button{
