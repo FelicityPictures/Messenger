@@ -1,0 +1,9 @@
+{% extends "master.html" %}
+{% block title %}New Chat{% endblock %}
+{% block body %}
+
+{% for user in users %}
+  <input type='checkbox' id='{{ user.username }}'> {{ user.username }} </input>
+{% endfor %}
+
+{% endblock %}

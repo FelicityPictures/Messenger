@@ -118,6 +118,10 @@ def chats(chat_id):
     current_user=session['current_user'], chat_id=chat_id, messages=messages,
     users_in_chat=users_in_chat)
 
+@app.route("/new_chat")
+def new_chat():
+    return render_template('new_chat.html', users=Users.query.all())
+
 @socketio.on('connect')
 def connected():
     username = session['current_user']['username']
