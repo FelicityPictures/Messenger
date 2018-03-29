@@ -7,10 +7,6 @@ body{
   overflow: hidden;
 }
 
-li{
-  padding: 10px;
-}
-
 #logout{
   float: right;
   margin-top: -20px;
@@ -27,8 +23,32 @@ li{
   width: 30%;
 }
 
+#selectWindow{
+  height: 5%;
+  /* border: 1px solid; */
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding-bottom: 3vh;
+}
+
+.selectView{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  width: 9vw;
+  border: 1px solid;
+}
+
+.selectView > img{
+  height: 15px;
+  width: 15px;
+}
+
 #chatsContainer{
-  max-height: 69%; /*change for height*/
+  max-height: 60%; /*change for height*/
   margin: 0;
   overflow-y: auto;
 }
@@ -38,11 +58,14 @@ li{
   text-align: left;
   display: flex;
   flex-flow: column-reverse;
+  padding-left: 0px;
 }
 
 #chats > li{
-  margin-top: 1vh;
+  margin-bottom: 1vh;
   border-bottom: 1px solid;
+  padding: 10px;
+  width: 90%;
 }
 
 #chatBox{
@@ -58,6 +81,11 @@ li{
 #messages{
   list-style-type: none;
   text-align: left;
+  padding-left: 0px;
+}
+
+#messages > li{
+  padding: 10px;
 }
 
 #inputForm{

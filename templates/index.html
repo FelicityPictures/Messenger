@@ -6,7 +6,7 @@
 
 <!-- <h3>Hello, {{ current_user.username }}.</h3> -->
 
-<a href="{{ url_for('logout') }}"><button type="button">Log Out</button></a>
+<a href="{{ url_for('logout') }}"><button type="button" id="logout">Log Out</button></a>
 {% endblock %}
 
 {% block body %}
@@ -34,16 +34,41 @@ Add sliding side bar for side menu to select online users.
 
 <div class="container">
   <div id="existingChats">
-  <h2>Existing, recent chats</h2>
+    <div id="selectWindow">
+      <div id="selectViewActive" class="selectView">
+        <img src="{{ url_for('static', filename='images/Chat.png') }}" />
+      </div>
+      <div id="selectExistingConvos" class="selectView">
+        <img src="{{ url_for('static', filename='images/Chat.png') }}" />
+      </div>
+      <div id="selectGames" class="selectView">
+        <img src="{{ url_for('static', filename='images/Chat.png') }}" />
+      </div>
+    </div>
     <div id="chatsContainer">
       <ul id="chats">
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
         {% for chat_id in current_user['chats'] %}
           <a href="{{ url_for('chats', chat_id=chat_id) }}"> <li> {{ chat_id }} </li> </a>
         {% endfor %}
       </ul>
     </div>
   </div>
-  <!-- <h2>Chats</h2> -->
 
   <div id="chatBox">
     {% if chat_id %}
@@ -57,7 +82,8 @@ Add sliding side bar for side menu to select online users.
           {% endfor %}
         </ul>
       {% else %}
-        <h1> Click on some shit to start, {{ current_user['username'] }}. </h1>
+      <!-- Make it so that by default, the most recent conversation is selected -->
+        <!-- <h1> Click on some shit to start, {{ current_user['username'] }}. </h1> -->
       {% endif %}
     </div>
 
