@@ -1,7 +1,7 @@
 body{
   font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
   /* font: Helvetica, sans-serif; */
-  background-color: #ffe0b2;
+  background-color: #b9f6ca;
 }
 
 .centerOnPage{
@@ -23,13 +23,15 @@ body{
   justify-content: center;
 }
 
-.inputText{
+input{
   -webkit-appearance: none;
   height: 5vh;
   width: 40vw;
-  border: 1px solid black;
+  border: 0px solid black;
   padding: 5px;
   margin: 5px;
+  background-color: #4bacb8;
+  font-color: black;
 }
 
 .button{

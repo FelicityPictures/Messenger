@@ -47,22 +47,23 @@ Add sliding side bar for side menu to select online users.
     </div>
     <div id="chatsContainer">
       <ul id="chats">
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
+        <a><li>No more conversations</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
         {% for chat_id in current_user['chats'] %}
           <a href="{{ url_for('chats', chat_id=chat_id) }}"> <li> {{ chat_id }} </li> </a>
         {% endfor %}

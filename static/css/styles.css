@@ -24,7 +24,7 @@ body{
 }
 
 #selectWindow{
-  height: 5%;
+  height: 10vh;
   /* border: 1px solid; */
   display: flex;
   flex-wrap: nowrap;
@@ -48,7 +48,7 @@ body{
 }
 
 #chatsContainer{
-  max-height: 60%; /*change for height*/
+  max-height: 75vh; /*change for height*/
   margin: 0;
   overflow-y: auto;
 }
@@ -61,7 +61,7 @@ body{
   padding-left: 0px;
 }
 
-#chats > li{
+#chats > a > li{
   margin-bottom: 1vh;
   border-bottom: 1px solid;
   padding: 10px;
@@ -73,7 +73,7 @@ body{
 }
 
 #messagesContainer{
-  max-height: 60%;
+  max-height: 70vh;
   margin: 0;
   overflow-y: auto;
 }
