@@ -57,3 +57,8 @@ socket.on('new_message', (data) => {
   document.getElementById("messages").appendChild(node);
   console.log("message sent!");
 });
+
+// logout button
+$('#logout').click(function(){
+    window.location.href = '../logout';
+  });

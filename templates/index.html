@@ -8,7 +8,6 @@
 {% block body %}
 
 <!--
-Add sliding side bar for side menu to select online users.
 <table>
   <thead>
      <tr>
@@ -28,8 +27,12 @@ Add sliding side bar for side menu to select online users.
      {% endfor %}
   </tbody>
 </table> -->
+
 <header>
-  <a href="{{ url_for('logout') }}"><button type="button" id="logout">Log Out</button></a>
+  <div id="header">
+    <img id="logout" src="{{ url_for('static', filename='images/powerIcon.png') }}" />
+    <h2>Notis</h2>
+  </div>
 </header>
 
 

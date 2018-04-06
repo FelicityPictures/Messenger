@@ -7,9 +7,25 @@ body{
   overflow: hidden;
 }
 
+#header{
+  position: float;
+  height: 50px;
+  width: 30%;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #logout{
-  float: right;
-  margin-top: 0px;
+  position: absolute;
+  left: 20px;
+  height: 30px;
+  width: 30px;
+}
+
+#logout:hover{
+  cursor: pointer;
 }
 
 .container{
