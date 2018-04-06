@@ -1,41 +1,41 @@
-<!DOCTYPE html>
-<html>
+{% extends "master.html" %}
 
-  <head>
-    <meta charset="utf-8">
-    <title>Notis</title>
-      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+{% block head %}
+  <!-- CSS Stuff -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+{% endblock %}
 
-    <!-- CSS Stuff -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
-
-    <!-- Bootstrap -->
-    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
-
+{% block body %}
+  <header>
     <p>Notis</p>
+  </header>
 
-  </head>
+  <div id="login" class="container leftOnPage center">
 
-  <body>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
 
-  <div id="login" class="centerOnPage centerContainer">
-    <p>Login</p>
-    <form class="centerContainer" action="/login" method="POST">
+    <form class="center" action="/login" method="POST">
       <input class="inputText" type="username" name="username" placeholder="Username">
       <input class="inputText" type="password" name="password" placeholder="Password" required>
       <input class="button" type="submit" value="Log in">
     </form>
-
     <a href="/register">register now!</a>
   </div>
+{% endblock %}
 
-</body>
-
-<footer>
-  <!-- jquery -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <!-- Javascript -->
-  <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script> -->
-</footer>
-
-</html>
+{% block footer %}
+  <footer>
+    <!-- jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Javascript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
+  </footer>
+{% endblock %}

@@ -1,5 +1,5 @@
 function checkPasswordMatch() {
-    var password = $("#password").val();
+    var password = $("#registerPassword").val();
     var confirmPassword = $("#confirmPassword").val();
 
     if (password != confirmPassword)

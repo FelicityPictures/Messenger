@@ -65,11 +65,14 @@ def register():
         flash("Already logged in!")
         return
     if request.method == 'POST':
-        with app.app_context():
-            user = Users(request.form['username'], request.form['password'])
-            db.session.add(user)
+        user = Users(request.form['username'], request.form['password'])
+        db.session.add(user)
+        try:
             db.session.commit()
-            print('\nRecord was successfully added\n')
+        except:
+            flash('A user with that username already exists')
+            return render_template('register.html')
+        print('\nRecord was successfully added\n')
         return redirect(url_for('index'))
     return render_template('register.html')
 
@@ -87,7 +90,7 @@ def login():
     target_user= Users.query.filter(Users.username == post_username).first()
 
     if not (target_user and target_user.check_password(post_password)):
-        flash('fuck off')
+        flash('Login failed')
         print('Wrong pass')
     else:
         session['logged_in'] = True

@@ -4,23 +4,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Plugged In</title>
+    <title>Notis</title>
 
-      <!-- CSS Stuff -->
-      <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" /> -->
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}">
 
-      <!-- Bootstrap -->
-      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- Bootstrap -->
+    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
 
-      <!-- JQuery -->
-      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <h1>Plugged In</h1>
     {% block head %}
     {% endblock %}
+
   </head>
 
   <body>
-  <!-- FELICITY PLS CHANGE THIS TO LOOK BETTER THANKS -->
+    <!-- FELICITY PLS CHANGE THIS TO LOOK BETTER THANKS -->
     <!-- {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul class=flashes>
@@ -33,14 +31,17 @@
 
     {% block body %}
     {% endblock %}
-  </body>
 
-  <footer>
-    <!-- jquery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <!-- page specific scripts -->
-    {% block footer %}
-    {% endblock %}
-  </footer>
+    <footer>
+      <!-- jquery -->
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+      <!-- page specific scripts -->
+      {% block footer %}
+      {% endblock %}
+
+    </footer>
+
+  </body>
 
 </html>

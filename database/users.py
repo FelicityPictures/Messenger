@@ -5,7 +5,7 @@ from bcrypt import checkpw, hashpw, gensalt
 class Users(db.Model):
     # user Modal
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(250), nullable=False)
+    username = db.Column(db.String(250), nullable=False, unique=True)
     password_hash = db.Column(db.Text, nullable=False)
     last_active = db.Column(db.DateTime, nullable=False,
             default=datetime.utcnow)

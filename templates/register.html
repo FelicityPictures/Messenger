@@ -1,21 +1,37 @@
 {% extends "master.html" %}
 
+{% block head %}
+<!-- CSS Stuff -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+{% endblock %}
+
 {% block body %}
+  <header>
+    <p>Notis</p>
+  </header>
 
-<h1>register.html</h1>
-
-<form action="/register" method="POST">
-  <input type="username" name="username" placeholder="Username" required>
-  <input type="password" name="password" id="password" placeholder="Password"
-    required>
-  <input type="password" id="confirmPassword" onChange="checkPasswordMatch();"
-    placeholder="Password" required>
-  <div class="registrationFormAlert" id="divCheckPasswordMatch"></div>
-  <input id="registerInput" type="submit" value="Register">
-</form>
-
+  <div id="register" class="container rightOnPage center">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form class="center" action="/register" method="POST">
+      <input class="inputText" type="username" name="username" placeholder="Username" required>
+      <input id="registerPassword" class="inputText" type="password" name="password" placeholder="Password" required>
+      <input id="confirmPassword" class="inputText" type="password" onChange="checkPasswordMatch();" placeholder="Confirm password" required>
+      <div id="divCheckPasswordMatch" class="registrationFormAlert"></div>
+      <input id="registerInput" class="button" type="submit" value="Register">
+    </form>
+    <a href="/login">Already have an account?</a>
+  </div>
 {% endblock %}
 
 {% block footer %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/register.js') }}"></script>
+  <!-- Javascript -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/register.js') }}"></script>
 {% endblock %}

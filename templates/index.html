@@ -3,13 +3,10 @@
 {% block head %}
 <!-- CSS Stuff -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
-
-<!-- <h3>Hello, {{ current_user.username }}.</h3> -->
-
-<a href="{{ url_for('logout') }}"><button type="button" id="logout">Log Out</button></a>
 {% endblock %}
 
 {% block body %}
+
 <!--
 Add sliding side bar for side menu to select online users.
 <table>
@@ -31,18 +28,22 @@ Add sliding side bar for side menu to select online users.
      {% endfor %}
   </tbody>
 </table> -->
+<header>
+  <a href="{{ url_for('logout') }}"><button type="button" id="logout">Log Out</button></a>
+</header>
+
 
 <div class="container">
   <div id="existingChats">
     <div id="selectWindow">
       <div id="selectViewActive" class="selectView">
-        <img src="{{ url_for('static', filename='images/Chat.png') }}" />
+        <img src="{{ url_for('static', filename='images/homeIcon.png') }}" />
       </div>
       <div id="selectExistingConvos" class="selectView">
-        <img src="{{ url_for('static', filename='images/Chat.png') }}" />
+        <img src="{{ url_for('static', filename='images/groupIcon.png') }}" />
       </div>
       <div id="selectGames" class="selectView">
-        <img src="{{ url_for('static', filename='images/Chat.png') }}" />
+        <img src="{{ url_for('static', filename='images/gameIcon.png') }}" />
       </div>
     </div>
     <div id="chatsContainer">
