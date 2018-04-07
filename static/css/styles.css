@@ -1,17 +1,36 @@
-h3{
-  position: float;
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #696969;
+  opacity: 50%;
+  border-radius: 20px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  opacity: 0%;
+}
+::-webkit-scrollbar-thumb:hover {
+  width:15px;
 }
 
 body{
   font: 13px Helvetica, Arial;
   overflow: hidden;
+  margin: 0px;
 }
 
-#header{
-  position: float;
+header{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+#title{
+  /* position: float; */
   height: 50px;
   width: 30%;
-  border: 1px solid;
+  border-bottom: 1px solid #75a478;
+  border-right: 1px solid #75a478;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,13 +38,23 @@ body{
 
 #logout{
   position: absolute;
-  left: 20px;
-  height: 30px;
-  width: 30px;
+  left: 15px;
+  height: 20px;
+  width: 20px;
 }
 
 #logout:hover{
   cursor: pointer;
+}
+
+#conversationHeader{
+  height: 50px;
+  width: 70%;
+  border-bottom: 1px solid #75a478;
+  border-right: 1px solid #75a478;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container{
@@ -37,15 +66,17 @@ body{
 
 #existingChats{
   width: 30%;
+  border-right: 1px solid #75a478;
 }
 
 #selectWindow{
-  height: 10vh;
-  /* border: 1px solid; */
+  height: 50px;
   display: flex;
+  flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-between;
-  padding-bottom: 3vh;
+  justify-content: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .selectView{
@@ -54,8 +85,20 @@ body{
   justify-content: center;
   vertical-align: middle;
   text-align: center;
-  width: 9vw;
-  border: 1px solid;
+  flex-grow: 1;
+  /* border: 1px solid; */
+}
+
+.selectView:hover{
+  cursor: pointer;
+}
+
+.selectView:active{
+  background-color: #d7ffd9;
+}
+
+.selected{
+  background-color: #d7ffd9;
 }
 
 .selectView > img{
@@ -64,8 +107,9 @@ body{
 }
 
 #chatsContainer{
-  max-height: 75vh; /*change for height*/
-  margin: 0;
+  height: 503px;
+  max-height: 502px; /*change for height*/
+  margin: 0px;
   overflow-y: auto;
 }
 
@@ -74,14 +118,22 @@ body{
   text-align: left;
   display: flex;
   flex-flow: column-reverse;
+  /* padding-right: 30px; */
   padding-left: 0px;
 }
 
 #chats > a > li{
-  margin-bottom: 1vh;
-  border-bottom: 1px solid;
-  padding: 10px;
-  width: 90%;
+  border-bottom: 1px solid #DCDCDC;
+  /* padding: 5px; */
+  width: 100%;
+}
+
+#chats > a > li > h3{
+  padding-left: 10px;
+}
+
+#chats > a > li > p{
+  padding-left: 10px;
 }
 
 #chatBox{
@@ -104,23 +156,33 @@ body{
   padding: 10px;
 }
 
-#inputForm{
-  display: flex;
-  flex-wrap: nowrap;
-  padding: 3px;
+#send{
+  border-top: 1px solid #75a478;
   position: absolute;
   bottom: 0;
   width: 70%;
 }
 
+#inputForm{
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 3px;
+
+}
+
 #inputText{
-  border-width: 1px;
   padding: 10px;
   width: 90%;
+  border: none;
 }
 
 #sendButton{
   width: 6%;
   border: none;
-  padding: auto;
+  /* border-radius: 3px; */
+  padding: 3px;
+  background-color: transparent;
+  color: #c48b9f;
+  font-size: 15px;
+  font-weight: bold;
 }

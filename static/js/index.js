@@ -1,10 +1,6 @@
-var sendButton = document.getElementById('sendButton');
-var textMessage = document.getElementById('inputText');
-var messageScroll = document.getElementById("messagesContainer");
-var messages = document.getElementById('messages');
-
 //on load, scroll is at the bottom
 window.onload = function () {
+  var messageScroll = $('#messagesContainer');
   messageScroll.scrollTop = messageScroll.scrollHeight;
 }
 
@@ -17,10 +13,10 @@ socket.on('connect', function() {
 });
 
 socket.on('active_user', (username)=>{
-  var node = document.createElement("LI");
+  // var node = document.createElement("LI");
   var textnode = document.createTextNode(username + "has joined the room");
-  node.appendChild(textnode);
-  document.getElementById("messages").appendChild(node);
+  // node.append(textnode);
+  $('#messages').append('<li>'+textnode+'</li>');
   console.log('active_id: '+ username);
 });
 
@@ -29,10 +25,11 @@ socket.on('disconnect', function(){
 });
 
 socket.on('deactive_user', (username)=>{
-  var node = document.createElement("LI");
-  var textnode = document.createTextNode(username + "has left the room");
-  node.appendChild(textnode);
-  document.getElementById("messages").appendChild(node);
+  // var node = document.createElement("LI");
+  var textnode = document.createTextNode(username + " has left the room");
+  // node.appendChild(textnode);
+  // $('#messages').append(node);
+  $('#messages').append('<li>'+username+' has left the room.</li>');
   console.log('deactive_user: '+ username);
 });
 
@@ -44,21 +41,46 @@ $("#inputForm").submit((e) => {
 // get message
 function sendMessage(){
   console.log('sending message');
-  var messageText = textMessage.value;
+  var textMessage = $('#inputText');
+  var messageText = textMessage.val();
+  // console.log(textMessage);
+  console.log(messageText);
   socket.emit('message', messageText);
-  document.getElementById("inputText").value = '';
+  $("#inputText").val('');
 }
 
 // receives messages, displays on the other screen
 socket.on('new_message', (data) => {
-  var node = document.createElement("LI");
+  // var node = document.createElement("LI");
   var textnode = document.createTextNode(data);
-  node.appendChild(textnode);
-  document.getElementById("messages").appendChild(node);
+  // node.append(textnode);
+  $('#messages').append('<li>'+data+'</li>');
   console.log("message sent!");
 });
 
 // logout button
 $('#logout').click(function(){
-    window.location.href = '../logout';
-  });
+  window.location.href = '../logout';
+});
+
+var lastClicked = $('#selectViewActives');
+// select window >
+// Should change to different windows when clicked
+// Need window specific functions
+function toggleSelected(elementClicked){
+  lastClicked.toggleClass('selected');
+  elementClicked.toggleClass('selected');
+  lastClicked = elementClicked;
+};
+$('#selectExistingConvos').click(function(){
+  toggleSelected($(this));
+  // load or show existing conversations
+});
+$('#selectViewActives').click(function(){
+  toggleSelected($(this));
+  // load or show active users
+});
+$('#selectGames').click(function(){
+  toggleSelected($(this));
+  // load or show games
+});

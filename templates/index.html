@@ -29,9 +29,12 @@
 </table> -->
 
 <header>
-  <div id="header">
+  <div id="title">
     <img id="logout" src="{{ url_for('static', filename='images/powerIcon.png') }}" />
     <h2>Notis</h2>
+  </div>
+  <div id="conversationHeader">
+    <h2>Conversation Name</h2>
   </div>
 </header>
 
@@ -39,10 +42,10 @@
 <div class="container">
   <div id="existingChats">
     <div id="selectWindow">
-      <div id="selectViewActive" class="selectView">
+      <div id="selectExistingConvos" class="selectView">
         <img src="{{ url_for('static', filename='images/homeIcon.png') }}" />
       </div>
-      <div id="selectExistingConvos" class="selectView">
+      <div id="selectViewActives" class="selectView selected">
         <img src="{{ url_for('static', filename='images/groupIcon.png') }}" />
       </div>
       <div id="selectGames" class="selectView">
@@ -68,6 +71,18 @@
         <a><li>1</li></a>
         <a><li>1</li></a>
         <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+        <a><li>1</li></a>
+          {% for user in users %}
+             <a><li>
+               <h3>{{ user.username }}</h3>
+               <p>{{ user.last_active }}</p>
+             </li><a>
+          {% endfor %}
         {% for chat_id in current_user['chats'] %}
           <a href="{{ url_for('chats', chat_id=chat_id) }}"> <li> {{ chat_id }} </li> </a>
         {% endfor %}
@@ -87,6 +102,17 @@
     <div id="messagesContainer">
       {% if messages %}
         <ul id="messages">
+          <li>No more conversations</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
           {% for m in messages %}
             <li> {{ m['message'] }} </li>
           {% endfor %}
@@ -97,10 +123,12 @@
       {% endif %}
     </div>
 
-    <form id="inputForm">
-      <input id="inputText" type="text" placeholder="Send a message"/>
-      <button type="submit" id="sendButton">Send</button>
-    </form>
+    <div id="send">
+      <form id="inputForm">
+        <input id="inputText" type="text" placeholder="Send a message"/>
+        <button type="submit" id="sendButton">Send</button>
+      </form>
+    </div>
 
   </div>
 
