@@ -1,7 +1,8 @@
 from flask import Flask, render_template, flash, redirect, request, session, url_for, abort
 from sqlalchemy_utils import create_database, database_exists
 from flask_socketio import SocketIO, send, emit, join_room, leave_room
-from database import db, Chats, Users, Messages
+from database import db, Chats, Users, Messages, dump_datetime
+from datetime import datetime
 import logging
 import os
 
@@ -115,6 +116,7 @@ def chats(chat_id):
     users_in_chat = target_chat.users_in_chat()
     if session['current_user']['username'] not in users_in_chat:
         abort(403)
+    session['current_user'] = Users.query.get(session['current_user']['id']).jasonify()
     messages = target_chat.messages_in_chat()
     users_in_chat.remove(session['current_user']['username'])
     session['current_chat'] = target_chat.id
@@ -134,7 +136,9 @@ def new_chat():
     if len(people) == 1:
         exist = current_user.check_private_chat_exits(people[0])
         if exist[0]:
+            print("\nIT EXITS\n")
             return(redirect(url_for('chats', chat_id=exist[1])))
+    print("\nmaking new\n")
     new_chat = Chats()
     new_chat.users.append(current_user)
     for person in people:
@@ -143,14 +147,18 @@ def new_chat():
     db.session.add(new_chat)
     db.session.commit()
     session['current_user'] = Users.query.get(session['current_user']['id']).jasonify()
+    print("\nmaking new\n")
     return(redirect(url_for('chats', chat_id=new_chat.id)))
 
 @socketio.on('connect')
 def connected():
+    user = Users.query.get(session['current_user']['id'])
+    user.last_active = datetime.utcnow()
     username = session['current_user']['username']
     print("\n Activate User: " + username)
     emit('active_user', username, broadcast=True) #back to client
     print('\nConnected!\n')
+
 
 @socketio.on('join')
 def join(data):

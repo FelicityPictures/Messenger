@@ -18,11 +18,15 @@ class Messages(db.Model):
         self.sender_id = sender_id
         self.chat_id = chat_id
 
+    def get_sender_username(self):
+        return Users.query.get(self.sender_id).username
+
     def jasonify(self):
         return{
             'id'        : self.id,
             'message'   : self.message,
             'sent_time' : self.sent_time,
             'sender_id' : self.sender_id,
+            'sender_username' : self.sender_username,
             'chat_id'   : self.chat_id
         }

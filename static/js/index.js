@@ -73,6 +73,10 @@ $('#compose').click(function(){
   window.location.href = '../new_chat';
 });
 
+$('#newChatSubmit').click(function(){
+  socket.emit('start_chat')
+});
+
 var lastClicked = $('#selectViewActives');
 var currentWindow = $('#activeUsers');
 // select window >
