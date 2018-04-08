@@ -56,8 +56,7 @@ def cant_access_page(e):
 @app.route('/index')
 def index():
     if session.get('logged_in'):
-        return render_template('index.html', users=Users.query.all(),
-        current_user=session['current_user'])
+        return redirect(url_for('chats', chat_id=1))
     else:
         return render_template('login.html')
 
@@ -119,7 +118,7 @@ def chats(chat_id):
     messages = target_chat.messages_in_chat()
     users_in_chat.remove(session['current_user']['username'])
     session['current_chat'] = target_chat.id
-    return render_template('index.html', current_user=session['current_user'],
+    return render_template('index.html', users=Users.query.all(), current_user=session['current_user'],
     chat_id=chat_id, messages=messages, users_in_chat=users_in_chat)
 
 @app.route("/new_chat", methods=['GET','POST'])

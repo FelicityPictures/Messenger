@@ -10,7 +10,7 @@
 <header>
   <div id="title">
     <img id="logout" src="{{ url_for('static', filename='images/powerIcon.png') }}" />
-    <h2>Notis</h2>
+    <h2>Notis, {{ current_user.username }}</h2>
     <button id='new chat'> <a href="{{ url_for('new_chat')}}">+</a></button>
   </div>
   <div id="conversationHeader">
