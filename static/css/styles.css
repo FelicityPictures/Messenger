@@ -113,7 +113,7 @@ header{
   overflow-y: auto;
 }
 
-#chats{
+.listOfInformation{
   list-style-type: none;
   text-align: left;
   display: flex;
@@ -122,18 +122,22 @@ header{
   padding-left: 0px;
 }
 
-#chats > a > li{
+.listOfInformation > a > li{
   border-bottom: 1px solid #DCDCDC;
   /* padding: 5px; */
   width: 100%;
 }
 
-#chats > a > li > h3{
+.listOfInformation > a > li > h3, p{
   padding-left: 10px;
 }
 
-#chats > a > li > p{
-  padding-left: 10px;
+.endOfList{
+  margin: 10px;
+  align-self: center;
+  color: #f8bbd0;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 #chatBox{
@@ -177,7 +181,7 @@ header{
 }
 
 #sendButton{
-  width: 6%;
+  width: 8%;
   border: none;
   /* border-radius: 3px; */
   padding: 3px;
@@ -185,4 +189,8 @@ header{
   color: #c48b9f;
   font-size: 15px;
   font-weight: bold;
+}
+
+#sendButton:hover{
+  cursor: pointer;
 }

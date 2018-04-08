@@ -64,6 +64,7 @@ $('#logout').click(function(){
 });
 
 var lastClicked = $('#selectViewActives');
+var currentWindow = $('#activeUsers');
 // select window >
 // Should change to different windows when clicked
 // Need window specific functions
@@ -74,13 +75,20 @@ function toggleSelected(elementClicked){
 };
 $('#selectExistingConvos').click(function(){
   toggleSelected($(this));
+  currentWindow.hide();
+  $('#chats').show();
+  currentWindow = $('#chats');
   // load or show existing conversations
 });
 $('#selectViewActives').click(function(){
   toggleSelected($(this));
-  // load or show active users
+  currentWindow.hide();
+  $('#activeUsers').show();
+  currentWindow = $('#activeUsers');
 });
 $('#selectGames').click(function(){
   toggleSelected($(this));
   // load or show games
 });
+
+$('#chats').hide();
