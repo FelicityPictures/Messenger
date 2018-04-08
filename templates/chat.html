@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% block title %}Chats{% endblock %}
+{% block chat_box %}
+
+<div id="messagesContainer">
+  {% if messages %}
+    <ul id="messages">
+      <li>No more messages</li>
+      {% for m in messages %}
+        <li> {{ m['message'] }} </li>
+        <p> {{m['sender_username']}} </p>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p> Start Talking! </p>
+  {% endif %}
+</div>
+<div id="send">
+  <form id="inputForm">
+    <input id="inputText" type="text" autocomplete="off" placeholder="Send a message" required/>
+    <button type="submit" id="sendButton">Send</button>
+  </form>
+</div>
+
+{% endblock %}
+
+{% block chat_script %}
+<script>
+var CHAT_ID = {{chat_id}};
+</script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}

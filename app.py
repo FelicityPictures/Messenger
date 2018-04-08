@@ -69,6 +69,8 @@ def register():
     if request.method == 'POST':
         user = Users(request.form['username'], request.form['password'])
         db.session.add(user)
+        global_chat = Chats.query.get(1)
+        global_chat.users.append(user)
         try:
             db.session.commit()
         except:
@@ -120,7 +122,7 @@ def chats(chat_id):
     messages = target_chat.messages_in_chat()
     users_in_chat.remove(session['current_user']['username'])
     session['current_chat'] = target_chat.id
-    return render_template('index.html', users=Users.query.all(), current_user=session['current_user'],
+    return render_template('chat.html', users=Users.query.all(), current_user=session['current_user'],
     chat_id=chat_id, messages=messages, users_in_chat=users_in_chat)
 
 @app.route("/new_chat", methods=['GET','POST'])
@@ -182,8 +184,8 @@ def my_event(data, chat_id):
     message = Messages(data,session['current_user']['id'],session['current_chat'])
     db.session.add(message)
     db.session.commit()
-    # emit('new_message', data, broadcast=True) #back to client
-    emit('new_message', (data, chat_id), room=chat_id) #back to client
+    username=session['current_user']['username']
+    emit('new_message', (data, chat_id, username), room=chat_id) #back to client
 
 
 if __name__=='__main__':

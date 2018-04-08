@@ -179,12 +179,17 @@ header{
   background-color: #ffeeff;
 }
 
-#messages > p{
+.chatMessage{
   margin: 0px;
   margin-bottom: 9px;
   padding: 0px;
   padding-left: 5px;
   color: #a5d6a7;
+}
+
+.chatAnnouncement{
+  color: black;
+  padding-left: 50%;
 }
 
 #send{
@@ -220,4 +225,13 @@ header{
 
 #sendButton:hover{
   cursor: pointer;
+}
+
+/* NEW CHAT */
+
+#newChatForm > input{
+  /* -webkit-appearance: none;
+  border: 1px solid #c48b9f;
+  height: 20px;
+  width: 20px; */
 }

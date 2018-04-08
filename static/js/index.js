@@ -1,6 +1,3 @@
-console.log("Chat_ID " + CHAT_ID)
-
-
 function scrollToBottomOfMessages(){
   var messageScroll = $('#messagesContainer');
   messageScroll.scrollTop(messageScroll.prop("scrollHeight"));
@@ -12,12 +9,11 @@ function scrollToBottomOfMessages(){
 var socket = io();
 socket.on('connect', function() {
     console.log('connected');
-    socket.emit('join', CHAT_ID)
 });
 
 socket.on('active_user', (username)=>{
-  $('#messages').append('<li>'+username+' joined the room</li>')
-  $('#' + String(username)).append('hi')
+  $('#messages').append('<p class="chatAnnouncement">'+username+' joined the room</p>')
+  // $('#' + String(username)).append('hi')
   scrollToBottomOfMessages();
   console.log('active_id: '+ username);
 });
@@ -27,7 +23,7 @@ socket.on('disconnect', function(){
 });
 
 socket.on('deactive_user', (username)=>{
-  $('#messages').append('<li>'+username+' has left the room.</li>');
+  $('#messages').append('<p class="chatAnnouncement">'+username+' has left the room.</p>');
   scrollToBottomOfMessages();
   console.log('deactive_user: '+ username);
 });
@@ -48,11 +44,11 @@ function sendMessage(){
 }
 
 // receives messages, displays on the other screen
-socket.on('new_message', (data, chat_id) => {
+socket.on('new_message', (data, chat_id, username) => {
   console.log("heres");
-  $('#messages').append('<li>'+String(data)+'</li>');
+  $('#messages').append('<li>'+String(data)+'</li><p class="chatMessage">'+username+'</p>');
   scrollToBottomOfMessages();
-  console.log("message sent to" + String(chat_id) + "!");
+  console.log("message sent from " + username + " to " + String(chat_id) + "!");
 });
 
 // logout button
