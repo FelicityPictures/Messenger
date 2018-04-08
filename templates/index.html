@@ -9,12 +9,16 @@
 
 <header>
   <div id="title">
-    <img id="logout" src="{{ url_for('static', filename='images/powerIcon.png') }}" />
+    <img id="logout" class="actionButtons" src="{{ url_for('static', filename='images/powerIcon.png') }}" />
     <h2>Notis</h2>
-    <button id='new chat'> <a href="{{ url_for('new_chat')}}">+</a></button>
+    <img id="compose" class="actionButtons" src="{{ url_for('static', filename='images/composeIcon.png') }}" />
   </div>
   <div id="conversationHeader">
-    <h2>Conversation Name</h2>
+    <h2>
+      {% for u in users_in_chat %}
+        {{ u }}
+      {% endfor %}
+    </h2>
   </div>
 </header>
 
@@ -55,24 +59,39 @@
     </div>
   </div>
 
-  <div id="chatBox">
-    <div id="messagesContainer">
-      {% if messages %}
-        <ul id="messages">
-          <li>No more conversations</li>
-          {% for m in messages %}
-            <li> {{ m['message'] }} </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p> Start Talking! </p>
-      {% endif %}
+  <div id="actionBox">
+    <div id="chatBox">
+      <div id="messagesContainer">
+        {% if messages %}
+          <ul id="messages">
+            <li>No more conversations</li>
+            {% for m in messages %}
+              <li> {{ m['message'] }} </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p> Start Talking! </p>
+        {% endif %}
+      </div>
+      <div id="send">
+        <form id="inputForm">
+          <input id="inputText" type="text" autocomplete="off" placeholder="Send a message" required/>
+          <button type="submit" id="sendButton">Send</button>
+        </form>
+      </div>
     </div>
 
-    <div id="send">
-      <form id="inputForm">
-        <input id="inputText" type="text" autocomplete="off" placeholder="Send a message" required/>
-        <button type="submit" id="sendButton">Send</button>
+    <div id="newChatBox">
+      <form method='post'>
+        {% for user in users %}
+          <input type='checkbox' name='people' id='{{ user.id }}' value='{{ user.id }}'>
+            {{ user.username }}
+          </input>
+        {% endfor %}
+
+        <button type='submit' id='newChatSubmit'>
+          Start Chatting!
+        </button>
       </form>
     </div>
 

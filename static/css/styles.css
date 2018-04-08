@@ -36,15 +36,22 @@ header{
   justify-content: center;
 }
 
-#logout{
+.actionButtons{
   position: absolute;
-  left: 15px;
   height: 20px;
   width: 20px;
 }
 
-#logout:hover{
+.actionButtons:hover{
   cursor: pointer;
+}
+
+#logout{
+  left: 15px;
+}
+
+#compose{
+  left: 345px;
 }
 
 #conversationHeader{
@@ -140,7 +147,7 @@ header{
   font-size: 15px;
 }
 
-#chatBox{
+#actionBox{
   width: 70%;
 }
 
