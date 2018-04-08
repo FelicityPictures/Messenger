@@ -81,19 +81,8 @@
       </div>
     </div>
 
-    <div id="newChatBox">
-      <form method='post'>
-        {% for user in users %}
-          <input type='checkbox' name='people' id='{{ user.id }}' value='{{ user.id }}'>
-            {{ user.username }}
-          </input>
-        {% endfor %}
-
-        <button type='submit' id='newChatSubmit'>
-          Start Chatting!
-        </button>
-      </form>
-    </div>
+    {% block new_chat %}
+    {% endblock %}
 
   </div>
 

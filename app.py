@@ -126,7 +126,7 @@ def new_chat():
     if request.method == 'GET':
     # everyone but yourself! Unless you wanna talk to yourself. Weirdo
         users = Users.query.filter(Users.id != session['current_user']['id']).all()
-        return render_template('new_chat.html', users=users)
+        return render_template('new_chat.html', users=users,current_user=session['current_user'])
     # the request form comes in a string, so this will typecast value to int
     people = [int(i) for i in request.form.getlist("people")]
     print("\nPeople:" + str(people) + "\n")
