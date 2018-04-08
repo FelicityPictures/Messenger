@@ -1,3 +1,5 @@
+var active_users = {};
+
 function scrollToBottomOfMessages(){
   var messageScroll = $('#messagesContainer');
   messageScroll.scrollTop(messageScroll.prop("scrollHeight"));
@@ -11,11 +13,12 @@ socket.on('connect', function() {
     console.log('connected');
 });
 
-socket.on('active_user', (username)=>{
+socket.on('active_user', (username, sid)=>{
+  active_users[username]=sid;
   $('#messages').append('<p class="chatAnnouncement">'+username+' joined the room</p>')
-  // $('#' + String(username)).append('hi')
   scrollToBottomOfMessages();
   console.log('active_id: '+ username);
+  console.log(active_users);
 });
 
 socket.on('disconnect', function(){
@@ -23,9 +26,11 @@ socket.on('disconnect', function(){
 });
 
 socket.on('deactive_user', (username)=>{
+  delete active_users[username]
   $('#messages').append('<p class="chatAnnouncement">'+username+' has left the room.</p>');
   scrollToBottomOfMessages();
   console.log('deactive_user: '+ username);
+  console.log(active_users);
 });
 
 $("#inputForm").submit((e) => {
