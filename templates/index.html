@@ -56,13 +56,6 @@
   </div>
 
   <div id="chatBox">
-    {% if users_in_chat %}
-    <h1>
-      {% for u in users_in_chat %}
-        {{ u }}
-      {% endfor %}
-    </h1>
-    {% endif %}
     <div id="messagesContainer">
       {% if messages %}
         <ul id="messages">
