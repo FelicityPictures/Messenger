@@ -122,7 +122,9 @@ def chats(chat_id):
     messages = target_chat.messages_in_chat()
     users_in_chat.remove(session['current_user']['username'])
     session['current_chat'] = target_chat.id
-    return render_template('chat.html', users=Users.query.all(), current_user=session['current_user'],
+    all_but_self = Users.query.all()
+    all_but_self.remove(Users.query.get(session['current_user']['id']))
+    return render_template('chat.html', users=all_but_self, current_user=session['current_user'],
     chat_id=chat_id, messages=messages, users_in_chat=users_in_chat)
 
 @app.route("/new_chat", methods=['GET','POST'])
