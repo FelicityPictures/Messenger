@@ -159,9 +159,9 @@ def connected():
     db.session.commit()
     username = session['current_user']['username']
     print("\n Activate User: " + username)
-    emit('active_user', username, broadcast=True) #back to client
+    sid = request.sid
+    emit('active_user', (username, sid), broadcast=True) #back to client
     print('\nConnected!\n')
-
 
 @socketio.on('join')
 def join(data):
@@ -173,9 +173,9 @@ def disconnected():
     # broadcast to all users that a person is active at this time
     print('\nDisconnected!\n')
     username = session['current_user']['username']
-    print("\n Deactivate User: " + username)
+    print("\nDeactivate User: " + username)
     emit('deactive_user', username, broadcast=True) #back to client
-    print('\nDisconnected!1\n')
+    print('\nDisconnected!\n')
 
 @socketio.on('message')
 def my_event(data, chat_id):
