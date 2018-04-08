@@ -154,6 +154,7 @@ def new_chat():
 def connected():
     user = Users.query.get(session['current_user']['id'])
     user.last_active = datetime.utcnow()
+    db.session.commit()
     username = session['current_user']['username']
     print("\n Activate User: " + username)
     emit('active_user', username, broadcast=True) #back to client

@@ -16,10 +16,8 @@ socket.on('connect', function() {
 });
 
 socket.on('active_user', (username)=>{
-  // var node = document.createElement("LI");
-  var textnode = document.createTextNode(username + "has joined the room");
-  // node.append(textnode);
-  $('#messages').append('<li>'+username+' joined the room</li>');
+  $('#messages').append('<li>'+username+' joined the room</li>')
+  $('#' + String(username)).append('hi')
   scrollToBottomOfMessages();
   console.log('active_id: '+ username);
 });
@@ -29,10 +27,6 @@ socket.on('disconnect', function(){
 });
 
 socket.on('deactive_user', (username)=>{
-  // var node = document.createElement("LI");
-  var textnode = document.createTextNode(username + " has left the room");
-  // node.appendChild(textnode);
-  // $('#messages').append(node);
   $('#messages').append('<li>'+username+' has left the room.</li>');
   scrollToBottomOfMessages();
   console.log('deactive_user: '+ username);

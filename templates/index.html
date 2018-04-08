@@ -41,7 +41,7 @@
         <div class="endOfList">No more users</div>
         {% for user in users %}
            <a><li>
-             <h3>{{ user.username }}</h3>
+             <h3 id='{{ user.username }}'>{{ user.username }}</h3>
              <p>{{ user.last_active }}</p>
            </li><a>
         {% endfor %}
