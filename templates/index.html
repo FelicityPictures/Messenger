@@ -67,6 +67,7 @@
             <li>No more messages</li>
             {% for m in messages %}
               <li> {{ m['message'] }} </li>
+              <p> {{m['sender_username']}} </p>
             {% endfor %}
           </ul>
         {% else %}

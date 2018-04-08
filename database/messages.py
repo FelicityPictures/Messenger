@@ -1,4 +1,4 @@
-from . import db, dump_datetime
+from . import db, Users, dump_datetime
 from datetime import datetime
 
 class Messages(db.Model):
@@ -27,6 +27,6 @@ class Messages(db.Model):
             'message'   : self.message,
             'sent_time' : self.sent_time,
             'sender_id' : self.sender_id,
-            'sender_username' : self.sender_username,
+            'sender_username' : self.get_sender_username(),
             'chat_id'   : self.chat_id
         }

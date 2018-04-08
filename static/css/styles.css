@@ -51,7 +51,7 @@ header{
 }
 
 #compose{
-  left: 345px;
+  left: 25%;
 }
 
 #conversationHeader{
@@ -164,7 +164,27 @@ header{
 }
 
 #messages > li{
-  padding: 10px;
+  border: 1px solid ;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 1px;
+  min-width: 5%;
+  max-width: 40%;
+  background-color: #ffeeff;
+}
+
+#messages > p{
+  margin: 0px;
+  margin-bottom: 9px;
+  padding: 0px;
+  padding-left: 5px;
+  color: #a5d6a7;
 }
 
 #send{
