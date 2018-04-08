@@ -1,7 +1,6 @@
-//on load, scroll is at the bottom
-window.onload = function () {
+function scrollToBottomOfMessages(){
   var messageScroll = $('#messagesContainer');
-  messageScroll.scrollTop = messageScroll.scrollHeight;
+  messageScroll.scrollTop(messageScroll.prop("scrollHeight"));
 }
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -16,7 +15,8 @@ socket.on('active_user', (username)=>{
   // var node = document.createElement("LI");
   var textnode = document.createTextNode(username + "has joined the room");
   // node.append(textnode);
-  $('#messages').append('<li>'+textnode+'</li>');
+  $('#messages').append('<li>'+username+' joined the room</li>');
+  scrollToBottomOfMessages();
   console.log('active_id: '+ username);
 });
 
@@ -30,6 +30,7 @@ socket.on('deactive_user', (username)=>{
   // node.appendChild(textnode);
   // $('#messages').append(node);
   $('#messages').append('<li>'+username+' has left the room.</li>');
+  scrollToBottomOfMessages();
   console.log('deactive_user: '+ username);
 });
 
@@ -52,9 +53,11 @@ function sendMessage(){
 // receives messages, displays on the other screen
 socket.on('new_message', (data) => {
   // var node = document.createElement("LI");
-  var textnode = document.createTextNode(data);
+  // var textnode = document.createTextNode(data);
+  // textnode=String(data);
   // node.append(textnode);
-  $('#messages').append('<li>'+data+'</li>');
+  $('#messages').append('<li>'+String(data)+'</li>');
+  scrollToBottomOfMessages();
   console.log("message sent!");
 });
 
@@ -92,3 +95,8 @@ $('#selectGames').click(function(){
 });
 
 $('#chats').hide();
+
+//on load, scroll is at the bottom
+window.onload = function () {
+  scrollToBottomOfMessages();
+}

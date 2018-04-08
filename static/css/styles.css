@@ -145,9 +145,10 @@ header{
 }
 
 #messagesContainer{
-  max-height: 70vh;
+  max-height: 450px;;
   margin: 0;
   overflow-y: auto;
+  border: 1px solid;
 }
 
 #messages{
