@@ -1,3 +1,6 @@
+console.log("Chat_ID " + CHAT_ID)
+
+
 function scrollToBottomOfMessages(){
   var messageScroll = $('#messagesContainer');
   messageScroll.scrollTop(messageScroll.prop("scrollHeight"));
@@ -9,6 +12,7 @@ function scrollToBottomOfMessages(){
 var socket = io();
 socket.on('connect', function() {
     console.log('connected');
+    socket.emit('join', CHAT_ID)
 });
 
 socket.on('active_user', (username)=>{
@@ -44,21 +48,17 @@ function sendMessage(){
   console.log('sending message');
   var textMessage = $('#inputText');
   var messageText = textMessage.val();
-  // console.log(textMessage);
   console.log(messageText);
-  socket.emit('message', messageText);
+  socket.emit('message', messageText, CHAT_ID);
   $("#inputText").val('');
 }
 
 // receives messages, displays on the other screen
-socket.on('new_message', (data) => {
-  // var node = document.createElement("LI");
-  // var textnode = document.createTextNode(data);
-  // textnode=String(data);
-  // node.append(textnode);
+socket.on('new_message', (data, chat_id) => {
+  console.log("heres");
   $('#messages').append('<li>'+String(data)+'</li>');
   scrollToBottomOfMessages();
-  console.log("message sent!");
+  console.log("message sent to" + String(chat_id) + "!");
 });
 
 // logout button

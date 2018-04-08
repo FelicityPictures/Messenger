@@ -1,6 +1,6 @@
 from flask import Flask, render_template, flash, redirect, request, session, url_for, abort
 from sqlalchemy_utils import create_database, database_exists
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import SocketIO, send, emit, join_room, leave_room
 from database import db, Chats, Users, Messages
 import logging
 import os
@@ -152,6 +152,11 @@ def connected():
     emit('active_user', username, broadcast=True) #back to client
     print('\nConnected!\n')
 
+@socketio.on('join')
+def join(data):
+    print('joined room')
+    join_room(data)
+
 @socketio.on('disconnect')
 def disconnected():
     # broadcast to all users that a person is active at this time
@@ -162,13 +167,14 @@ def disconnected():
     print('\nDisconnected!1\n')
 
 @socketio.on('message')
-def my_event(data):
+def my_event(data, chat_id):
     print("\nMessage: " + data)
     logger.info('Message:' + data + '\n')
     message = Messages(data,session['current_user']['id'],session['current_chat'])
     db.session.add(message)
     db.session.commit()
-    emit('new_message', data, broadcast=True) #back to client
+    # emit('new_message', data, broadcast=True) #back to client
+    emit('new_message', (data, chat_id), room=chat_id) #back to client
 
 
 if __name__=='__main__':
