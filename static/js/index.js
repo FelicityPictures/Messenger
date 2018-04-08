@@ -68,9 +68,9 @@ $('#logout').click(function(){
 
 // compose button
 $('#compose').click(function(){
-  $('#chatBox').hide();
-  $('#newChatBox').show();
-  // window.location.href = '../new_chat';
+  // $('#chatBox').hide();
+  // $('#newChatBox').show();
+  window.location.href = '../new_chat';
 });
 
 var lastClicked = $('#selectViewActives');
