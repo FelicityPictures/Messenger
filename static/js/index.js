@@ -13,8 +13,13 @@ socket.on('connect', function() {
     console.log('connected');
 });
 
-socket.on('active_user', (username, sid)=>{
+socket.on('active_user', (username, sid, all_active_users)=>{
   active_users[username]=sid;
+  for (var key in all_active_users) {
+    if (all_active_users[key] != undefined){
+        active_users[key] = all_active_users[key];
+      }
+  }
   $('#messages').append('<p class="chatAnnouncement">'+username+' joined the room</p>')
   scrollToBottomOfMessages();
   console.log('active_id: '+ username);
@@ -63,8 +68,6 @@ $('#logout').click(function(){
 
 // compose button
 $('#compose').click(function(){
-  // $('#chatBox').hide();
-  // $('#newChatBox').show();
   window.location.href = '../new_chat';
 });
 

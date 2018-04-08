@@ -14,6 +14,8 @@ app = Flask(__name__)
 
 db_url = 'sqlite:///:memory:'
 
+all_active_users = {}
+
 app.config.update(
     SECRET_KEY='secret!',
     SQLALCHEMY_DATABASE_URI=db_url,
@@ -160,7 +162,10 @@ def connected():
     username = session['current_user']['username']
     print("\n Activate User: " + username)
     sid = request.sid
-    emit('active_user', (username, sid), broadcast=True) #back to client
+    global all_active_users
+    all_active_users[username] = sid
+    emit('active_user', (username, sid, all_active_users), broadcast=True) #back to client
+    print('\n'+str(all_active_users)+'\n')
     print('\nConnected!\n')
 
 @socketio.on('join')
