@@ -46,7 +46,7 @@ function sendMessage(){
 // receives messages, displays on the other screen
 socket.on('new_message', (data, chat_id, username) => {
   console.log("heres");
-  $('#messages').append('<li>'+String(data)+'</li><p class="chatMessage">'+username+'</p>');
+  $('#messages').append('<li>'+String(data)+'</li><p class="chatMessageUsername">'+username+'</p>');
   scrollToBottomOfMessages();
   console.log("message sent from " + username + " to " + String(chat_id) + "!");
 });
@@ -67,8 +67,8 @@ $('#newChatSubmit').click(function(){
   socket.emit('start_chat')
 });
 
-var lastClicked = $('#selectViewActives');
-var currentWindow = $('#activeUsers');
+var lastClicked = $('#selectExistingConvos');
+var currentWindow = $('#chats');
 // select window >
 // Should change to different windows when clicked
 // Need window specific functions
@@ -90,15 +90,14 @@ $('#selectViewActives').click(function(){
   $('#activeUsers').show();
   currentWindow = $('#activeUsers');
 });
-$('#selectGames').click(function(){
-  toggleSelected($(this));
-  // load or show games
-});
-
-$('#chats').hide();
-$('#newChatBox').hide();
+// $('#selectGames').click(function(){
+//   toggleSelected($(this));
+//   // load or show games
+// });
 
 //on load, scroll is at the bottom
 window.onload = function () {
   scrollToBottomOfMessages();
+  $('#activeUsers').hide();
+  $('#newChatBox').hide();
 }

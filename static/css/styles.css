@@ -51,7 +51,7 @@ header{
 }
 
 #compose{
-  left: 25%;
+  left: 26%;
 }
 
 #conversationHeader{
@@ -117,6 +117,7 @@ header{
   height: 503px;
   max-height: 502px; /*change for height*/
   margin: 0px;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -131,12 +132,13 @@ header{
 
 .listOfInformation > a > li{
   border-bottom: 1px solid #DCDCDC;
-  /* padding: 5px; */
-  width: 100%;
+  padding: 5px;
+  width: 99%;
 }
 
 .listOfInformation > a > li > h3, p{
   padding-left: 10px;
+  margin-bottom: 5px;
 }
 
 .endOfList{
@@ -145,6 +147,10 @@ header{
   color: #f8bbd0;
   font-weight: bold;
   font-size: 15px;
+}
+
+#chats > a{
+  text-decoration: none;
 }
 
 #actionBox{
@@ -164,7 +170,7 @@ header{
 }
 
 #messages > li{
-  border: 1px solid ;
+  border: 1px solid #c48b9f;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 20px;
   border-top-left-radius: 20px;
@@ -173,13 +179,13 @@ header{
   padding-right: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
-  margin: 1px;
+  margin: 5px;
   min-width: 5%;
   max-width: 40%;
   background-color: #ffeeff;
 }
 
-.chatMessage{
+.chatMessageUsername{
   margin: 0px;
   margin-bottom: 9px;
   padding: 0px;
@@ -229,9 +235,28 @@ header{
 
 /* NEW CHAT */
 
-#newChatForm > input{
-  /* -webkit-appearance: none;
-  border: 1px solid #c48b9f;
-  height: 20px;
-  width: 20px; */
+#newChatForm{
+  transform: translate(0%, 100%);
+}
+
+.center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#newChatSubmit{
+  width: 10%;
+  padding: 5px;
+  background-color: #c48b9f;
+  color: black;
+  font-size: 11px;
+  border-radius: 3px;
+  border: 0px solid;
+  margin-top: 20px;
+}
+
+#newChatSubmit:hover{
+  cursor: pointer;
 }

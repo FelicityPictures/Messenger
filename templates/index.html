@@ -10,7 +10,9 @@
 <header>
   <div id="title">
     <img id="logout" class="actionButtons" src="{{ url_for('static', filename='images/powerIcon.png') }}" />
-    <h2>Notis, {{ current_user.username }}</h2>
+    <h2>Notis
+      <!-- You are logged in as {{ current_user.username }} -->
+    </h2>
     <img id="compose" class="actionButtons" src="{{ url_for('static', filename='images/composeIcon.png') }}" />
   </div>
   <div id="conversationHeader">
@@ -25,10 +27,10 @@
 <div class="container">
   <div id="existingChats">
     <div id="selectWindow">
-      <div id="selectExistingConvos" class="selectView">
+      <div id="selectExistingConvos" class="selectView selected">
         <img src="{{ url_for('static', filename='images/homeIcon.png') }}" />
       </div>
-      <div id="selectViewActives" class="selectView selected">
+      <div id="selectViewActives" class="selectView">
         <img src="{{ url_for('static', filename='images/groupIcon.png') }}" />
       </div>
       <div id="selectGames" class="selectView">
@@ -42,8 +44,8 @@
         {% for user in users %}
            <a><li>
              <h3 id='{{ user.username }}'>{{ user.username }}</h3>
-             <p>{{ user.last_active }}</p>
-           </li><a>
+             <p>Last active: {{ user.last_active }}</p>
+           </li></a>
         {% endfor %}
       </ul>
 
