@@ -66,6 +66,13 @@ $('#logout').click(function(){
   window.location.href = '../logout';
 });
 
+// compose button
+$('#compose').click(function(){
+  $('#chatBox').hide();
+  $('#newChatBox').show();
+  // window.location.href = '../new_chat';
+});
+
 var lastClicked = $('#selectViewActives');
 var currentWindow = $('#activeUsers');
 // select window >
@@ -95,6 +102,7 @@ $('#selectGames').click(function(){
 });
 
 $('#chats').hide();
+$('#newChatBox').hide();
 
 //on load, scroll is at the bottom
 window.onload = function () {
