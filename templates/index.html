@@ -7,37 +7,16 @@
 
 {% block body %}
 
-<!--
-<table>
-  <thead>
-     <tr>
-        <th>id</th>
-        <th>Username</th>
-        <th>last_active</th>
-     </tr>
-  </thead>
-
-  <tbody>
-     {% for user in users %}
-        <tr>
-           <td>{{ user.id }}</td>
-           <td>{{ user.username }}</td>
-           <td>{{ user.last_active }}</td>
-        </tr>
-     {% endfor %}
-  </tbody>
-</table> -->
-
 <header>
   <div id="title">
     <img id="logout" src="{{ url_for('static', filename='images/powerIcon.png') }}" />
     <h2>Notis</h2>
+    <button id='new chat'> <a href="{{ url_for('new_chat')}}">+</a></button>
   </div>
   <div id="conversationHeader">
     <h2>Conversation Name</h2>
   </div>
 </header>
-
 
 <div class="container">
   <div id="existingChats">
@@ -81,37 +60,25 @@
     <h1>
       {% for u in users_in_chat %}
         {{ u }}
-        <!-- MAYBE TTHE NAME COULD BE A LINK TO SOMETING -->
       {% endfor %}
     </h1>
     {% endif %}
     <div id="messagesContainer">
       {% if messages %}
         <ul id="messages">
-          <li>No more messages</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
+          <li>No more conversations</li>
           {% for m in messages %}
             <li> {{ m['message'] }} </li>
           {% endfor %}
         </ul>
       {% else %}
-      <!-- Make it so that by default, the most recent conversation is selected -->
-        <!-- <h1> Click on some shit to start, {{ current_user['username'] }}. </h1> -->
+        <p> Start Talking! </p>
       {% endif %}
     </div>
 
     <div id="send">
       <form id="inputForm">
-        <input id="inputText" type="text" placeholder="Send a message"/>
+        <input id="inputText" type="text" autocomplete="off" placeholder="Send a message" required/>
         <button type="submit" id="sendButton">Send</button>
       </form>
     </div>

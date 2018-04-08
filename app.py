@@ -31,15 +31,18 @@ with app.app_context():
     chat = Chats()
     user = Users("ng","thing")
     user2 = Users("wu","thing")
+    user3 = Users("chou","thing")
     chat.users.append(user)
     chat.users.append(user2)
+    chat.users.append(user3)
     db.session.add(chat)
     db.session.add(user)
+    db.session.add(user2)
+    db.session.add(user3)
     db.session.commit()
     message = Messages("waassap",user.id,chat.id)
     db.session.add(message)
     db.session.commit()
-    # print ("\n" + str(user.id) + "    " + str(chat.id) +"\n")
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -53,7 +56,6 @@ def cant_access_page(e):
 @app.route('/index')
 def index():
     if session.get('logged_in'):
-        # print('\n activepeople' + str(active_ids)+ '\n')
         return render_template('index.html', users=Users.query.all(),
         current_user=session['current_user'])
     else:
@@ -117,13 +119,32 @@ def chats(chat_id):
     messages = target_chat.messages_in_chat()
     users_in_chat.remove(session['current_user']['username'])
     session['current_chat'] = target_chat.id
-    return render_template('index.html', users=Users.query.all(),
-    current_user=session['current_user'], chat_id=chat_id, messages=messages,
-    users_in_chat=users_in_chat)
+    return render_template('index.html', current_user=session['current_user'],
+    chat_id=chat_id, messages=messages, users_in_chat=users_in_chat)
 
-@app.route("/new_chat")
+@app.route("/new_chat", methods=['GET','POST'])
 def new_chat():
-    return render_template('new_chat.html', users=Users.query.all())
+    if request.method == 'GET':
+    # everyone but yourself! Unless you wanna talk to yourself. Weirdo
+        users = Users.query.filter(Users.id != session['current_user']['id']).all()
+        return render_template('new_chat.html', users=users)
+    # the request form comes in a string, so this will typecast value to int
+    people = [int(i) for i in request.form.getlist("people")]
+    print("\nPeople:" + str(people) + "\n")
+    current_user = Users.query.get(session['current_user']['id'])
+    if len(people) == 1:
+        exist = current_user.check_private_chat_exits(people[0])
+        if exist[0]:
+            return(redirect(url_for('chats', chat_id=exist[1])))
+    new_chat = Chats()
+    new_chat.users.append(current_user)
+    for person in people:
+        user = Users.query.get(person)
+        new_chat.users.append(user)
+    db.session.add(new_chat)
+    db.session.commit()
+    session['current_user'] = Users.query.get(session['current_user']['id']).jasonify()
+    return(redirect(url_for('chats', chat_id=new_chat.id)))
 
 @socketio.on('connect')
 def connected():
@@ -143,7 +164,6 @@ def disconnected():
 
 @socketio.on('message')
 def my_event(data):
-    # message = Messages(data, target_user.id, )
     print("\nMessage: " + data)
     logger.info('Message:' + data + '\n')
     message = Messages(data,session['current_user']['id'],session['current_chat'])

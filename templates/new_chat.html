@@ -2,8 +2,16 @@
 {% block title %}New Chat{% endblock %}
 {% block body %}
 
-{% for user in users %}
-  <input type='checkbox' id='{{ user.username }}'> {{ user.username }} </input>
-{% endfor %}
+<form method='post'>
+  {% for user in users %}
+    <input type='checkbox' name='people' id='{{ user.id }}' value='{{ user.id }}'>
+      {{ user.username }}
+    </input>
+  {% endfor %}
+
+  <button type='submit' id='newChatSubmit'>
+    Start Chatting!
+  </button>
+</form>
 
 {% endblock %}
