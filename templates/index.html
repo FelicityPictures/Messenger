@@ -9,9 +9,9 @@
 
 <header>
   <div id="title">
-    <img id="logout" src="{{ url_for('static', filename='images/powerIcon.png') }}" />
+    <img id="logout" class="actionButtons" src="{{ url_for('static', filename='images/powerIcon.png') }}" />
     <h2>Notis, {{ current_user.username }}</h2>
-    <button id='new chat'> <a href="{{ url_for('new_chat')}}">+</a></button>
+    <img id="compose" class="actionButtons" src="{{ url_for('static', filename='images/composeIcon.png') }}" />
   </div>
   <div id="conversationHeader">
     <h2>
@@ -64,7 +64,7 @@
       <div id="messagesContainer">
         {% if messages %}
           <ul id="messages">
-            <li>No more conversations</li>
+            <li>No more messages</li>
             {% for m in messages %}
               <li> {{ m['message'] }} </li>
             {% endfor %}
