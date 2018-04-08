@@ -117,13 +117,14 @@ def chats(chat_id):
     messages = target_chat.messages_in_chat()
     users_in_chat.remove(session['current_user']['username'])
     session['current_chat'] = target_chat.id
-    return render_template('index.html', users=Users.query.all(),
-    current_user=session['current_user'], chat_id=chat_id, messages=messages,
-    users_in_chat=users_in_chat)
+    return render_template('index.html', current_user=session['current_user'],
+    chat_id=chat_id, messages=messages, users_in_chat=users_in_chat)
 
 @app.route("/new_chat")
 def new_chat():
-    return render_template('new_chat.html', users=Users.query.all())
+    # everyone but yourself! Unless you wanna talk to yourself. Weirdo.
+    users=Users.query.filter(Users.id != session['current_user']['id']).all()
+    return render_template('new_chat.html', users=users)
 
 @socketio.on('connect')
 def connected():

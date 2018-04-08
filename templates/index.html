@@ -7,27 +7,6 @@
 
 {% block body %}
 
-<!--
-<table>
-  <thead>
-     <tr>
-        <th>id</th>
-        <th>Username</th>
-        <th>last_active</th>
-     </tr>
-  </thead>
-
-  <tbody>
-     {% for user in users %}
-        <tr>
-           <td>{{ user.id }}</td>
-           <td>{{ user.username }}</td>
-           <td>{{ user.last_active }}</td>
-        </tr>
-     {% endfor %}
-  </tbody>
-</table> -->
-
 <header>
   <div id="header">
     <img id="logout" src="{{ url_for('static', filename='images/powerIcon.png') }}" />
@@ -52,22 +31,6 @@
     <div id="chatsContainer">
       <ul id="chats">
         <a><li>No more conversations</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
-        <a><li>1</li></a>
         {% for chat_id in current_user['chats'] %}
           <a href="{{ url_for('chats', chat_id=chat_id) }}"> <li> {{ chat_id }} </li> </a>
         {% endfor %}
@@ -80,7 +43,6 @@
     <h1>
       {% for u in users_in_chat %}
         {{ u }}
-        <!-- MAYBE TTHE NAME COULD BE A LINK TO SOMETING -->
       {% endfor %}
     </h1>
     {% endif %}
@@ -91,16 +53,14 @@
             <li> {{ m['message'] }} </li>
           {% endfor %}
         </ul>
+        <form id="inputForm">
+          <input id="inputText" type="text" placeholder="Send a message"/>
+          <button type="submit" id="sendButton">Send</button>
+        </form>
       {% else %}
-      <!-- Make it so that by default, the most recent conversation is selected -->
-        <!-- <h1> Click on some shit to start, {{ current_user['username'] }}. </h1> -->
+        <h1> Click on a chat to start talking, {{ current_user['username'] }}. </h1>
       {% endif %}
     </div>
-
-    <form id="inputForm">
-      <input id="inputText" type="text" placeholder="Send a message"/>
-      <button type="submit" id="sendButton">Send</button>
-    </form>
 
   </div>
 
