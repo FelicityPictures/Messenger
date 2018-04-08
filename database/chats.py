@@ -17,5 +17,8 @@ class Chats(db.Model):
     def users_in_chat(self):
         return [user.username for user in self.users]
 
+    def users_id_in_chat(self):
+        return {self.id : [user.id for user in self.users]}
+
     def messages_in_chat(self):
         return [m.jasonify() for m in self.messages]

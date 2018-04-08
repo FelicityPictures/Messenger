@@ -22,6 +22,17 @@ class Users(db.Model):
     def check_password(self, password):
         return checkpw(password.encode('utf-8'), self.password_hash)
 
+    # returns a bool if the chat exits given a person_id
+    def check_private_chat_exits(self, id):
+        private_chats = [chat.users_id_in_chat() for chat in self.chats if len(chat.users) == 2]
+        # return private_chats
+        for chat in private_chats:
+            for id, users in chat.items():
+                print("pairing"+str(id)+str(users))
+                if id in users:
+                    return (True, id)
+        return (False, 0)
+
     def jasonify(self):
         #Return object data in easily serializeable format
         return {
