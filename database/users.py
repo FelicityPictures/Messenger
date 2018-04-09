@@ -39,5 +39,6 @@ class Users(db.Model):
            'id'         : self.id,
            'last_active': dump_datetime(self.last_active),
            'username'   : self.username,
-           'chats'      : [chat.id for chat in self.chats]
+           'chats'      : [chat.id for chat in self.chats],
+           'chats_user' : [chat.users_in_chat() for chat in self.chats]
            }
