@@ -19,6 +19,7 @@ socket.on('active_user', (username, sid, all_active_users)=>{
     if (all_active_users[key] != undefined){
         active_users[key] = all_active_users[key];
       }
+    $('#'+key).replaceWith("<h3 id='"+key+"'>" + key + " is active</h3>");
   }
   $('#messages').append('<p class="chatAnnouncement">'+username+' joined the room</p>')
   scrollToBottomOfMessages();
@@ -98,12 +99,7 @@ $('#selectViewActives').click(function(){
   $('#activeUsers').show();
   currentWindow = $('#activeUsers');
 });
-// $('#selectGames').click(function(){
-//   toggleSelected($(this));
-//   // load or show games
-// });
 
-//on load, scroll is at the bottom
 window.onload = function () {
   scrollToBottomOfMessages();
   $('#activeUsers').hide();
