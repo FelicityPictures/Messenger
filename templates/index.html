@@ -10,8 +10,8 @@
 <header>
   <div id="title">
     <img id="logout" class="actionButtons" src="{{ url_for('static', filename='images/powerIcon.png') }}" />
-    <h2>Notis
-      (You are "{{ current_user.username }}")
+    <h2>Notis,
+      "{{ current_user.username }}"
     </h2>
     <img id="compose" class="actionButtons" src="{{ url_for('static', filename='images/composeIcon.png') }}" />
   </div>
@@ -33,9 +33,9 @@
       <div id="selectViewActives" class="selectView">
         <img src="{{ url_for('static', filename='images/groupIcon.png') }}" />
       </div>
-      <div id="selectGames" class="selectView">
+      <!-- <div id="selectGames" class="selectView">
         <img src="{{ url_for('static', filename='images/gameIcon.png') }}" />
-      </div>
+      </div> -->
     </div>
     <div id="chatsContainer">
 

@@ -143,6 +143,8 @@ header{
 .listOfInformation > a > li{
   border-bottom: 1px solid #DCDCDC;
   padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   width: 99%;
 }
 
