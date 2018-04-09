@@ -156,7 +156,7 @@ def new_chat():
     db.session.add(new_chat)
     db.session.commit()
     session['current_user'] = Users.query.get(session['current_user']['id']).jasonify()
-    print("\nmaking new\n")
+    print("\nmade new\n")
     return(redirect(url_for('chats', chat_id=new_chat.id)))
 
 # ===============================================
@@ -200,7 +200,8 @@ def my_event(data, chat_id):
     db.session.commit()
     username = session['current_user']['username']
     display = False
-    if username in Chats.query.get(chat_id).users:
+
+    if username in Chats.query.get(chat_id).users_in_chat():
         display = True
     emit('new_message', (data, chat_id, username, display), room=chat_id) #back to client
 
