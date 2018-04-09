@@ -53,7 +53,7 @@
         <div class="endOfList">No more conversations</div>
         {% for chat_id in current_user['chats'] %}
           <a href="{{ url_for('chats', chat_id=chat_id) }}">
-            <li> {{ chat_id }} </li>
+            <li id="{{ chat_id }}"> {{ chat_id }} </li>
           </a>
         {% endfor %}
       </ul>

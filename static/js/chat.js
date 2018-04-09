@@ -12,8 +12,10 @@ socket.on('connect', function() {
 
 socket.on('add_chat_to_list', (data) => {
   console.log("added");
-  // $('#chats').append('<li>'+String(data)+'</li><p class="chatMessageUsername">'+username+'</p>')
-  $('#chats').append("<a href=" + "/chats/" + CHAT_ID +"<li>" + CHAT_ID + "</li></a>");
+  var link ="'/chats/" + CHAT_ID + "'";
+  if (!USER_CHATS.includes(CHAT_ID)){
+    $('#chats').append("<a href=" + link +"><li>" + CHAT_ID + "</li></a>");
+  }
 });
 
 socket.on('disconnect', function() {

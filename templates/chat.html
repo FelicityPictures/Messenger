@@ -31,7 +31,7 @@
 
 {% block chat_script %}
 <script>
-var CHAT_ID = {{chat_id}};
+var CHAT_ID = {{ chat_id }};
 var USER_CHATS = {{ current_user['chats'] }};
 var USERS_IN_CHAT = {{ users_in_chat|tojson }};
 var USER_ID = {{ current_user['id'] }};

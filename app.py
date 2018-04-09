@@ -214,14 +214,14 @@ def my_event(data, chat_id):
 
 @socketio.on('add_chat_to_list')
 def add_chat_to_list(data):
-    pass
-    # target_chat = Chats.query.get(data)
-    # these_users = target_chat.users_in_chat()
-    # print("\nthese:" + these_users)
-    # users.remove(session['current_user'])
-    # for username in all_active_users.keys():
-    #     if username in these_users:
-    #         emit('add_chat_to_list', (data, these_users), room=user[username])
+
+    print (data)
+    users_in_chat = Chats.query.get(data).users_in_chat()
+    users_in_chat.remove(session['current_user']['username'])
+    print(str(users_in_chat))
+    for username in all_active_users.keys():
+        if username in users_in_chat:
+            emit('add_chat_to_list', data, room=all_active_users[username])
 
 if __name__=='__main__':
     app.debug=True
