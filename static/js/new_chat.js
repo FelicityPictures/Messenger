@@ -1,5 +1,5 @@
 $("#newChatForm").submit((e) => {
-  e.preventDefault();
+  // e.preventDefault();
   emit_to_users_in_chat();
 })
 

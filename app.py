@@ -134,6 +134,9 @@ def chats(chat_id):
 
 @app.route("/new_chat", methods=['GET','POST'])
 def new_chat():
+    if not session.get('logged_in'):
+        flash("Must login")
+        return redirect(url_for('login'))
     if request.method == 'GET':
     # everyone but yourself! Unless you wanna talk to yourself. Weirdo
         users = Users.query.filter(Users.id != session['current_user']['id']).all()
