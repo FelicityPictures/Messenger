@@ -20,7 +20,8 @@ socket.on('active_user', (username, sid, all_active_users)=>{
       active_users[key] = all_active_users[key];
     }
     $('#'+key).replaceWith("<h3 id='"+key+"'>" + key + " is active now</h3>");
-    $('#last_active_'+username).replaceWith("");
+    var p_id = "'"+"last_active_" + username + "'";
+    $('#last_active_'+username).replaceWith("<p id=" + p_id + "> </p>");
   }
   $('#messages').append('<p class="chatAnnouncement">'+username+' joined the room</p>')
   scrollToBottomOfMessages();
@@ -35,13 +36,14 @@ socket.on('disconnect', function(){
 socket.on('deactive_user', (username)=>{
   delete active_users[username];
   $('#'+username).each(function(x){
-    var new_text = $(this).text().replace("is active", "");
+    var new_text = $(this).text().replace("is active now", "");
     $(this).text(new_text);
   })
   var dt = new Date();
-  var time = dt.getFullYear() + "-" + dt.getMonth() + "-" + dt.getDay() + "\n" +
+  var time = dt.getFullYear() + "-0" + dt.getMonth() + "-0" + dt.getDay() + "<br>" +
   dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-  $('#last_active_'+username).replaceWith("<p id='last_active_'" + username + "> Last Active: " + time +"</p>");
+  var p_id = "'"+"last_active_" + username + "'";
+  $('#last_active_'+username).replaceWith("<p id=" + p_id + "> Last Active: " + time +"</p>");
   $('#messages').append('<p class="chatAnnouncement">'+username+' has left the room.</p>');
   scrollToBottomOfMessages();
   console.log('deactive_user: '+ username);
