@@ -195,8 +195,11 @@ def my_event(data, chat_id):
     message = Messages(data,session['current_user']['id'],session['current_chat'])
     db.session.add(message)
     db.session.commit()
-    username=session['current_user']['username']
-    emit('new_message', (data, chat_id, username), room=chat_id) #back to client
+    username = session['current_user']['username']
+    display = False
+    if username in Chats.query.get(chat_id).users:
+        display = True
+    emit('new_message', (data, chat_id, username, display), room=chat_id) #back to client
 
 
 if __name__=='__main__':

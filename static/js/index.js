@@ -19,7 +19,8 @@ socket.on('active_user', (username, sid, all_active_users)=>{
     if (all_active_users[key] != undefined){
         active_users[key] = all_active_users[key];
       }
-    $('#'+key).replaceWith("<h3 id='"+key+"'>" + key + " is active</h3>");
+    $('#'+key).replaceWith("<h3 id='"+key+"'>" + key + " is active now</h3>");
+    $('#last_active_'+username).replaceWith("");
   }
   $('#messages').append('<p class="chatAnnouncement">'+username+' joined the room</p>')
   scrollToBottomOfMessages();
@@ -37,6 +38,10 @@ socket.on('deactive_user', (username)=>{
     var new_text = $(this).text().replace("is active", "");
     $(this).text(new_text);
   })
+  var dt = new Date();
+  var time = dt.getFullYear() + "-" + dt.getMonth() + "-" + dt.getDay() + "\n" +
+  dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+  $('#last_active_'+username).replaceWith("<p id='last_active_'" + username "> Last Active: " + time +"</p>");
   $('#messages').append('<p class="chatAnnouncement">'+username+' has left the room.</p>');
   scrollToBottomOfMessages();
   console.log('deactive_user: '+ username);
@@ -59,9 +64,10 @@ function sendMessage(){
 }
 
 // receives messages, displays on the other screen
-socket.on('new_message', (data, chat_id, username) => {
+socket.on('new_message', (data, chat_id, username, display) => {
   console.log("heres");
   $('#messages').append('<li>'+String(data)+'</li><p class="chatMessageUsername">'+username+'</p>');
+
   scrollToBottomOfMessages();
   console.log("message sent from " + username + " to " + String(chat_id) + "!");
 });

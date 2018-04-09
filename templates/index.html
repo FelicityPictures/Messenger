@@ -44,7 +44,7 @@
         {% for user in users %}
            <a><li>
              <h3 id='{{ user.username }}'>{{ user.username }}</h3>
-             <p id='last_active'>Last active: {{ user.last_active }}</p>
+             <p id='last_active_{{ user.username }}'>Last active: {{ user.last_active }}</p>
            </li></a>
         {% endfor %}
       </ul>
