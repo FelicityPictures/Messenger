@@ -10,11 +10,15 @@ socket.on('connect', function() {
   }
 });
 
-socket.on('add_chat_to_list', (data) => {
-  console.log("added");
-  var link ="'/chats/" + CHAT_ID + "'";
-  if (!USER_CHATS.includes(CHAT_ID)){
-    $('#chats').append("<a href=" + link +"><li>" + CHAT_ID + "</li></a>");
+socket.on('add_chat_to_list', (data, users_in_chat) => {
+  var link ="'/chats/" + data + "'";
+  console.log(users_in_chat);
+  var user_string = "";
+  for (var i = 0; i < users_in_chat.length; i++) {
+    user_string = user_string + users_in_chat[i];
+  }
+  if (!USER_CHATS.includes(data)){
+    $('#chats').append("<a href=" + link +"><li>" + user_string + "</li></a>");
   }
 });
 
