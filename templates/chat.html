@@ -26,6 +26,7 @@
 {% block chat_script %}
 <script>
 var CHAT_ID = {{chat_id}};
+var USER_CHATS = {{ current_user['chats'] }}
 </script>
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/chat.js') }}"></script>

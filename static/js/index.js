@@ -17,8 +17,8 @@ socket.on('active_user', (username, sid, all_active_users)=>{
   active_users[username]=sid;
   for (var key in all_active_users) {
     if (all_active_users[key] != undefined){
-        active_users[key] = all_active_users[key];
-      }
+      active_users[key] = all_active_users[key];
+    }
     $('#'+key).replaceWith("<h3 id='"+key+"'>" + key + " is active now</h3>");
     $('#last_active_'+username).replaceWith("");
   }
@@ -65,9 +65,7 @@ function sendMessage(){
 
 // receives messages, displays on the other screen
 socket.on('new_message', (data, chat_id, username, display) => {
-  console.log("heres");
   $('#messages').append('<li>'+String(data)+'</li><p class="chatMessageUsername">'+username+'</p>');
-
   scrollToBottomOfMessages();
   console.log("message sent from " + username + " to " + String(chat_id) + "!");
 });

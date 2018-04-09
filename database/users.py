@@ -25,12 +25,12 @@ class Users(db.Model):
     # returns a bool if the chat exits given a person_id
     def check_private_chat_exits(self, id):
         private_chats = [chat.users_id_in_chat() for chat in self.chats if len(chat.users) == 2]
-        # return private_chats
+        print ("private chats: " + str(private_chats))
         for chat in private_chats:
-            for id, users in chat.items():
-                print("pairing"+str(id)+str(users))
+            for chat_id, users in chat.items():
+                print("pairing chat_id:" + str(id) + "user_id" + str(users))
                 if id in users:
-                    return (True, id)
+                    return (True, chat_id)
         return (False, 0)
 
     def jasonify(self):

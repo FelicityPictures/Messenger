@@ -52,10 +52,6 @@
       <ul id="chats" class="listOfInformation">
         <div class="endOfList">No more conversations</div>
         {% for chat_id in current_user['chats'] %}
-          <!-- {% for u in users_in_chat %}
-            {{ u }}
-          {% endfor %} -->
-
           <a href="{{ url_for('chats', chat_id=chat_id) }}">
             <li> {{ chat_id }} </li>
           </a>
@@ -86,4 +82,8 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% block chat_script %}
 {% endblock %}
+
+{% block new_chat_script %}
+{% endblock %}
+
 {% endblock %}
