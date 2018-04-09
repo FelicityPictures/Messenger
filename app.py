@@ -156,6 +156,10 @@ def new_chat():
     print("\nmaking new\n")
     return(redirect(url_for('chats', chat_id=new_chat.id)))
 
+# ===============================================
+# Socket Events
+# ===============================================
+
 @socketio.on('connect')
 def connected():
     user = Users.query.get(session['current_user']['id'])

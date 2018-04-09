@@ -32,7 +32,11 @@ socket.on('disconnect', function(){
 });
 
 socket.on('deactive_user', (username)=>{
-  delete active_users[username]
+  delete active_users[username];
+  $('#'+username).each(function(x){
+    var new_text = $(this).text().replace("is active", "");
+    $(this).text(new_text);
+  })
   $('#messages').append('<p class="chatAnnouncement">'+username+' has left the room.</p>');
   scrollToBottomOfMessages();
   console.log('deactive_user: '+ username);
