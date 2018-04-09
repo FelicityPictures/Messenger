@@ -41,7 +41,7 @@ socket.on('deactive_user', (username)=>{
   var dt = new Date();
   var time = dt.getFullYear() + "-" + dt.getMonth() + "-" + dt.getDay() + "\n" +
   dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-  $('#last_active_'+username).replaceWith("<p id='last_active_'" + username "> Last Active: " + time +"</p>");
+  $('#last_active_'+username).replaceWith("<p id='last_active_'" + username + "> Last Active: " + time +"</p>");
   $('#messages').append('<p class="chatAnnouncement">'+username+' has left the room.</p>');
   scrollToBottomOfMessages();
   console.log('deactive_user: '+ username);
