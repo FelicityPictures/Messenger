@@ -23,7 +23,11 @@ socket.on('active_user', (username, sid, all_active_users)=>{
     var p_id = "'"+"last_active_" + username + "'";
     $('#last_active_'+username).replaceWith("<p id=" + p_id + "> </p>");
   }
-  $('#messages').append('<p class="chatAnnouncement">'+username+' joined the room</p>')
+  if(selfUsername===username){
+    $('#messages').append('<p class="chatAnnouncement">You have joined the room</p>');
+  }else{
+    $('#messages').append('<p class="chatAnnouncement">'+username+' joined the room</p>');
+  }
   scrollToBottomOfMessages();
   console.log('active_id: '+ username);
   console.log(active_users);
@@ -44,7 +48,11 @@ socket.on('deactive_user', (username)=>{
   dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
   var p_id = "'"+"last_active_" + username + "'";
   $('#last_active_'+username).replaceWith("<p id=" + p_id + "> Last Active: " + time +"</p>");
-  $('#messages').append('<p class="chatAnnouncement">'+username+' has left the room.</p>');
+  if(selfUsername===username){
+    $('#messages').append('<p class="chatAnnouncement">You left the room.</p>');
+  }else{
+    $('#messages').append('<p class="chatAnnouncement">'+username+' has left the room.</p>');
+  }
   scrollToBottomOfMessages();
   console.log('deactive_user: '+ username);
   console.log(active_users);
@@ -67,7 +75,11 @@ function sendMessage(){
 
 // receives messages, displays on the other screen
 socket.on('new_message', (data, chat_id, username, display) => {
-  $('#messages').append('<li>'+String(data)+'</li><p class="chatMessageUsername">'+username+'</p>');
+  if(selfUsername===username){
+    $('#messages').append('<li class="self messages">'+String(data)+'</li>');
+  }else{
+    $('#messages').append('<li class="other messages">'+String(data)+'</li><p class="chatMessageUsername">'+username+'</p>');
+  }
   scrollToBottomOfMessages();
   console.log("message sent from " + username + " to " + String(chat_id) + "!");
 });

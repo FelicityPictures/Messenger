@@ -14,6 +14,11 @@
   width:15px;
 }
 
+@font-face {
+   font-family: myFirstFont;
+   src: url(https://fonts.googleapis.com/css?family=Poppins);
+}
+
 body{
   font: 13px Helvetica, Arial;
   overflow: hidden;
@@ -36,10 +41,15 @@ header{
   justify-content: center;
 }
 
+#title > h2{
+  font-family: 'Comfortaa', cursive;
+  margin: auto;
+}
+
 .actionButtons{
   position: absolute;
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
 }
 
 .actionButtons:hover{
@@ -161,18 +171,24 @@ header{
   max-height: 520px;
   margin: 0;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 #messages{
   list-style-type: none;
   text-align: left;
   padding-left: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #messages > li{
-  border: 1px solid #c48b9f;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 20px;
+  max-width: 500px;
+  margin: 0px;
+}
+
+#messages > .messages{
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   padding-left: 10px;
@@ -182,7 +198,23 @@ header{
   margin: 5px;
   min-width: 5%;
   max-width: 40%;
+}
+
+#messages > .other{
+  align-self: flex-start;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 20px;
+  border: 1px solid #75a478;
+  background-color: #d7ffd9;
+}
+
+#messages > .self{
+  align-self: flex-end;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 3px;
+  border: 1px solid #c48b9f;
   background-color: #ffeeff;
+  margin-right: 10px;
 }
 
 .chatMessageUsername{
@@ -191,11 +223,11 @@ header{
   padding: 0px;
   padding-left: 5px;
   color: #a5d6a7;
+  align-self: flex-start;
 }
 
 .chatAnnouncement{
   color: black;
-  padding-left: 50%;
 }
 
 #send{

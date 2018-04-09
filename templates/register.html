@@ -1,15 +1,6 @@
-{% extends "master.html" %}
+{% extends "access.html" %}
 
-{% block head %}
-<!-- CSS Stuff -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
-{% endblock %}
-
-{% block body %}
-  <header>
-    <p>Notis</p>
-  </header>
-
+  {% block accessBox %}
   <div id="register" class="container centerOnPage center">
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -29,9 +20,10 @@
     </form>
     <a href="/login">Already have an account?</a>
   </div>
-{% endblock %}
 
-{% block footer %}
-  <!-- Javascript -->
-  <script type="text/javascript" src="{{ url_for('static', filename='js/register.js') }}"></script>
-{% endblock %}
+  {% endblock %}
+
+  {% block accessFooter %}
+    <!-- Javascript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/register.js') }}"></script>
+  {% endblock %}

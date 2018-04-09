@@ -1,15 +1,6 @@
-{% extends "master.html" %}
+{% extends "access.html" %}
 
-{% block head %}
-  <!-- CSS Stuff -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
-{% endblock %}
-
-{% block body %}
-  <header>
-    <p>Notis</p>
-  </header>
-
+{% block accessBox %}
   <div id="login" class="container centerOnPage center">
 
     {% with messages = get_flashed_messages() %}
@@ -31,11 +22,7 @@
   </div>
 {% endblock %}
 
-{% block footer %}
-  <footer>
-    <!-- jquery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <!-- Javascript -->
-    <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
-  </footer>
+{% block accessFooter %}
+  <!-- Javascript -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
 {% endblock %}
