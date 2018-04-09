@@ -6,8 +6,14 @@
   {% if messages %}
     <ul id="messages">
       {% for m in messages %}
-        <li> {{ m['message'] }} </li>
-        <p class="chatMessageUsername"> {{m['sender_username']}} </p>
+
+        {% if m['sender_username'] != current_user['username'] %}
+          <li class="other messages"> {{ m['message'] }} </li>
+          <p class="chatMessageUsername"> {{m['sender_username']}} </p>
+        {% else %}
+          <li class="self messages"> {{ m['message'] }} </li>
+        {% endif %}
+
       {% endfor %}
     </ul>
   {% else %}

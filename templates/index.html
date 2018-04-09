@@ -11,7 +11,7 @@
   <div id="title">
     <img id="logout" class="actionButtons" src="{{ url_for('static', filename='images/powerIcon.png') }}" />
     <h2>Notis
-      <!-- You are logged in as {{ current_user.username }} -->
+      (You are "{{ current_user.username }}")
     </h2>
     <img id="compose" class="actionButtons" src="{{ url_for('static', filename='images/composeIcon.png') }}" />
   </div>
@@ -80,6 +80,10 @@
 
 <script type="text/javascript"  src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+<!-- Passing variables into JS -->
+<script>
+  var selfUsername = '{{current_user['username']}}';
+</script>
 {% block chat_script %}
 {% endblock %}
 
