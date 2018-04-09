@@ -1,0 +1,25 @@
+{% extends "master.html" %}
+
+{% block head %}
+  <!-- CSS Stuff -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+{% endblock %}
+
+{% block body %}
+  <header>
+    <p>Notis</p>
+  </header>
+
+<!-- INSERT THINGS HERE -->
+  {% block accessBox %}
+  {% endblock %}
+
+
+{% endblock %}
+
+{% block footer %}
+
+  {% block accessFooter %}
+  {% endblock %}
+
+{% endblock %}
