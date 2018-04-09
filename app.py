@@ -113,7 +113,7 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route("/chats/<chat_id>")
-def chats(chat_id):
+def chats(chat_id, new_chat=False):
     if not session.get('logged_in'):
         flash("Must login")
         return redirect(url_for('login'))
@@ -130,7 +130,7 @@ def chats(chat_id):
     all_but_self = Users.query.all()
     all_but_self.remove(Users.query.get(session['current_user']['id']))
     return render_template('chat.html', users=all_but_self, current_user=session['current_user'],
-    chat_id=chat_id, messages=messages, users_in_chat=users_in_chat)
+    chat_id=chat_id, messages=messages, users_in_chat=users_in_chat, new_chat=False)
 
 @app.route("/new_chat", methods=['GET','POST'])
 def new_chat():
@@ -191,6 +191,11 @@ def disconnected():
     emit('deactive_user', username, broadcast=True) #back to client
     print('\nDisconnected!\n')
 
+@socketio.on('leave')
+def leave(data):
+    print('left room')
+    leave_room(data)
+
 @socketio.on('message')
 def my_event(data, chat_id):
     print("\nMessage: " + data)
@@ -204,6 +209,16 @@ def my_event(data, chat_id):
         display = True
     emit('new_message', (data, chat_id, username, display), room=chat_id) #back to client
 
+@socketio.on('add_chat_to_list')
+def add_chat_to_list(data):
+    pass
+    # target_chat = Chats.query.get(data)
+    # these_users = target_chat.users_in_chat()
+    # print("\nthese:" + these_users)
+    # users.remove(session['current_user'])
+    # for username in all_active_users.keys():
+    #     if username in these_users:
+    #         emit('add_chat_to_list', (data, these_users), room=user[username])
 
 if __name__=='__main__':
     app.debug=True
