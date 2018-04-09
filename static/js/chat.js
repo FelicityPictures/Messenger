@@ -18,7 +18,7 @@ socket.on('add_chat_to_list', (data, users_in_chat) => {
     user_string = user_string + users_in_chat[i];
   }
   if (!USER_CHATS.includes(data)){
-    $('#chats').append("<a href=" + link +"><li>" + user_string + "</li></a>");
+    // $('#chats').append("<a href=" + link +"><li>" + user_string + "</li></a>");
   }
 });
 

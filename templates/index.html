@@ -51,10 +51,10 @@
 
       <ul id="chats" class="listOfInformation">
         <div class="endOfList">No more conversations</div>
-        {% for users in current_user['chats_user'] %}
-          <a href="{{ url_for('chats', chat_id=chat_id) }}">
+        {% for i in range(current_user['chats_user']|length) %}
+          <a href="{{ url_for('chats', chat_id=current_user['chats'][i]) }}">
             <li id="{{ chat_id }}">
-              {% for u in users %}
+              {% for u in current_user['chats_user'][i] %}
                 {% if u != current_user['username'] %}
                   {{ u }}
                 {% endif %}
